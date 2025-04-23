@@ -7,7 +7,7 @@
         public string Email { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
 
         public Cart Cart { get; set; } // 1 - 1 Cart

@@ -23,7 +23,7 @@ namespace ECommerce.Application.Features.Users.Commands.DeleteUser
             if (user == null) return ResultResponse<Unit>.FailResponse("User not found");
 
             await _unitOfWork.User.Delete(user);
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
             return ResultResponse<Unit>.SuccessResponse(Unit.Value);
         }
     }

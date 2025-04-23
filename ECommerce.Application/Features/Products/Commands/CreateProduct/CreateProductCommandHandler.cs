@@ -21,7 +21,7 @@ namespace ECommerce.Application.Features.Products.Commands.CreateProduct
         {
             Product product = _mapper.Map<Product>(request);
             await _unitOfWork.Product.AddAsync(product);
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return ResultResponse<Guid>.SuccessResponse(product.Id);
         }

@@ -141,6 +141,10 @@ namespace ECommerce.Infrastructure.Data
                 e.ToTable("Order");
                 e.HasKey(pk => pk.Id);
                 e.Property(t => t.TotalAmount).HasColumnType("decimal(18,2)");
+
+                e.HasOne(e => e.User)
+                    .WithMany(t => t.Orders)
+                    .HasForeignKey(fk => fk.UserId);
             });
 
             modelBuilder.Entity<OrderItem>(e =>

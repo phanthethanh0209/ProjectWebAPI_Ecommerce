@@ -28,7 +28,7 @@ namespace ECommerce.Application.Features.Categories.Commands.UpdateCategory
             }
 
             await _unitOfWork.Category.Update(category);
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return ResultResponse<Guid>.SuccessResponse(category.Id);
         }

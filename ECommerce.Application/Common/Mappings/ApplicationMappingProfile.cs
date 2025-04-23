@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using ECommerce.Application.Features.Orders.Commands.CreateOrder;
+using ECommerce.Application.Features.Orders.DTOs;
 using ECommerce.Application.Features.Products.Commands.CreateProduct;
 using ECommerce.Application.Features.Products.Commands.UpdateProduct;
 using ECommerce.Application.Features.Products.DTOs;
@@ -23,6 +25,16 @@ namespace ECommerce.Application.Common.Mappings
             CreateMap<RegisterCommand, User>();
             CreateMap<UpdateUserCommand, User>();
             CreateMap<User, GetUserResponse>();
+
+            // Mapping Order
+            CreateMap<CreateOrderCommand, Order>()
+                .ForMember(dest => dest.OrderItems, opt => opt.Ignore());
+
+            // Mapping OrderItem
+            CreateMap<CreateOrderItemDTO, OrderItem>();
+
+            // Mapping Payment
+            CreateMap<PaymentDTO, Payment>();
 
         }
     }

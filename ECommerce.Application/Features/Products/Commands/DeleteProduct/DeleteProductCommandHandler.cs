@@ -28,7 +28,7 @@ namespace ECommerce.Application.Features.Products.Commands.CreateProduct
             }
 
             await _unitOfWork.Product.Delete(product);
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return ResultResponse<Unit>.SuccessResponse(Unit.Value);
 

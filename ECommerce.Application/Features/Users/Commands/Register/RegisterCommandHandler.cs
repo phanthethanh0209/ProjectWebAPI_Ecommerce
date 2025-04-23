@@ -20,8 +20,11 @@ namespace ECommerce.Application.Features.Users.Commands.Register
         public async Task<ResultResponse<Guid>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             User user = _mapper.Map<User>(request);
+            // hash password 
+            user.Password = BCrypt.Net.BCrypt.HashPassword(request.password);
+
             await _unitOfWork.User.AddAsync(user);
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return ResultResponse<Guid>.SuccessResponse(user.Id);
         }

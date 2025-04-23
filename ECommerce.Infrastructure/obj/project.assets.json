@@ -4837,11 +4837,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ASP.NET Core Web API\\ECommerce\\ECommerce.Infrastructure\\ECommerce.Infrastructure.csproj",
+      "projectUniqueName": "D:\\ASP.NET Core Web API\\up_github\\Ecommerce\\ProjectWebAPI_Ecommerce\\ECommerce.Infrastructure\\ECommerce.Infrastructure.csproj",
       "projectName": "ECommerce.Infrastructure",
-      "projectPath": "D:\\ASP.NET Core Web API\\ECommerce\\ECommerce.Infrastructure\\ECommerce.Infrastructure.csproj",
+      "projectPath": "D:\\ASP.NET Core Web API\\up_github\\Ecommerce\\ProjectWebAPI_Ecommerce\\ECommerce.Infrastructure\\ECommerce.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "D:\\ASP.NET Core Web API\\ECommerce\\ECommerce.Infrastructure\\obj\\",
+      "outputPath": "D:\\ASP.NET Core Web API\\up_github\\Ecommerce\\ProjectWebAPI_Ecommerce\\ECommerce.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4859,8 +4859,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\ASP.NET Core Web API\\ECommerce\\ECommerce.Application\\ECommerce.Application.csproj": {
-              "projectPath": "D:\\ASP.NET Core Web API\\ECommerce\\ECommerce.Application\\ECommerce.Application.csproj"
+            "D:\\ASP.NET Core Web API\\up_github\\Ecommerce\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\ECommerce.Application.csproj": {
+              "projectPath": "D:\\ASP.NET Core Web API\\up_github\\Ecommerce\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\ECommerce.Application.csproj"
             }
           }
         }

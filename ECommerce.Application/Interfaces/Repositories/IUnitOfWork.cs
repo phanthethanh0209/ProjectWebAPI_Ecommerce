@@ -14,6 +14,10 @@ namespace ECommerce.Application.Interfaces.Repositories
         IGenericRepository<Order> Order { get; }
         IGenericRepository<OrderItem> OrderItem { get; }
         IGenericRepository<Payment> Payment { get; }
-        Task SaveChangeAsync();
+
+        Task BeginTransactionAsync();
+        Task CommitTransactionAsync();
+        Task RollbackTransactionAsync();
+        Task SaveChangesAsync();
     }
 }

@@ -21,7 +21,7 @@ namespace ECommerce.Application.Features.Categories.Commands.CreateCategory
         {
             Category category = _mapper.Map<Category>(request);
             await _unitOfWork.Category.AddAsync(category);
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return ResultResponse<Guid>.SuccessResponse(category.Id);
         }

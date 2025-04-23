@@ -73,7 +73,7 @@ namespace ECommerce.Infrastructure.Authentication
 
             // Save RefreshToken
             await _unitOfWork.RefreshToken.AddAsync(refreshToken);
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return token;
         }

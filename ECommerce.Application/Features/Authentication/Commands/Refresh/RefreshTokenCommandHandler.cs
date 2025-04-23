@@ -37,7 +37,7 @@ namespace ECommerce.Application.Features.Authentication.Commands.Refresh
             // update revoked for old token
             storedToken.IsRevoked = true;
             await _unitOfWork.RefreshToken.Update(storedToken);
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             // generate access and refresh token
             LoginResponse token = await _jwtProvider.GenerateToken(user);

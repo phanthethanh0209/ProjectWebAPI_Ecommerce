@@ -1,12 +1,14 @@
 ﻿using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Domain.Entities;
 using ECommerce.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace ECommerce.Infrastructure.Repositories
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly ApplicationDbContext _db;
+        private IDbContextTransaction? _transaction;
         private bool _disposed = false;
 
         public IGenericRepository<User> User { get; private set; }
@@ -43,8 +45,10 @@ namespace ECommerce.Infrastructure.Repositories
         }
 
 
-        public async Task SaveChangeAsync()
+        public async Task SaveChangesAsync()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(nameof(UnitOfWork));
             await _db.SaveChangesAsync();
         }
 
@@ -61,6 +65,50 @@ namespace ECommerce.Infrastructure.Repositories
                 _db.Dispose(); // giai phong DbContext
             }
             _disposed = true;
+        }
+
+        public async Task BeginTransactionAsync()
+        {
+            if (_disposed) throw new ObjectDisposedException(nameof(UnitOfWork));
+            _transaction = await _db.Database.BeginTransactionAsync();
+        }
+
+        public async Task CommitTransactionAsync()
+        {
+            if (_disposed)
+                throw new ObjectDisposedException(nameof(UnitOfWork));
+
+            if (_transaction == null)
+                throw new InvalidOperationException("No transaction has been started");
+
+            try
+            {
+                await _db.SaveChangesAsync();
+                await _transaction.CommitAsync();
+            }
+            catch
+            {
+                await _transaction.RollbackAsync();
+                throw;
+            }
+            finally
+            {
+                await _transaction.DisposeAsync();
+                _transaction = null;
+            }
+        }
+
+        public async Task RollbackTransactionAsync()
+        {
+            if (_disposed)
+                throw new ObjectDisposedException(nameof(UnitOfWork));
+
+            if (_transaction == null)
+                throw new InvalidOperationException("No transaction has been started");
+
+            await _transaction.RollbackAsync();
+            await _transaction.DisposeAsync();
+            _transaction = null;
         }
     }
 }

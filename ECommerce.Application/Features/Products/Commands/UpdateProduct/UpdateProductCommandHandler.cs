@@ -35,7 +35,7 @@ namespace ECommerce.Application.Features.Products.Commands.UpdateProduct
 
             _mapper.Map(request, product); // map data from command to product
             await _unitOfWork.Product.Update(product);
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return ResultResponse<Guid>.SuccessResponse(product.Id);
         }

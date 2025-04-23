@@ -24,7 +24,7 @@ namespace ECommerce.Application.Features.Users.Commands.UpdateUser
 
             _mapper.Map(request, user);
             await _unitOfWork.User.Update(user);
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return ResultResponse<Guid>.SuccessResponse(user.Id);
         }

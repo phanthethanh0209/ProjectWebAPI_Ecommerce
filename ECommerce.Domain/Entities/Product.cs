@@ -7,7 +7,7 @@
         public string Description { get; set; }
         public int StockQuantity { get; set; }
         public decimal Price { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public Guid CategoryId { get; set; } // FK
         public Category Category { get; set; } // Navigation Property

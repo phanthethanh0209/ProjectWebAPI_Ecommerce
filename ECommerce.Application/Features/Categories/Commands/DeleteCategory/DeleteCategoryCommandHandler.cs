@@ -23,7 +23,7 @@ namespace ECommerce.Application.Features.Categories.Commands.DeleteCategory
                 throw new NotFoundException("Category", request.Id);
             }
             await _unitOfWork.Category.Delete(category);
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return ResultResponse<Unit>.SuccessResponse(Unit.Value);
         }

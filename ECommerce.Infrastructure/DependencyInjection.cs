@@ -1,8 +1,10 @@
 ﻿using ECommerce.Application.Interfaces;
 using ECommerce.Application.Interfaces.Repositories;
+using ECommerce.Application.Interfaces.Services;
 using ECommerce.Infrastructure.Authentication;
 using ECommerce.Infrastructure.Data;
 using ECommerce.Infrastructure.Repositories;
+using ECommerce.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -54,6 +56,8 @@ namespace ECommerce.Infrastructure
                         ValidateIssuerSigningKey = true
                     };
                 });
+
+            services.AddScoped<IStripeService, StripeService>();
 
             return services;
         }

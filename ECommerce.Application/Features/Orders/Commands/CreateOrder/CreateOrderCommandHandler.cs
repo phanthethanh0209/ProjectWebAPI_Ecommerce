@@ -2,6 +2,7 @@
 using ECommerce.Application.Common.Responses;
 using ECommerce.Application.Features.Orders.DTOs;
 using ECommerce.Application.Interfaces.Repositories;
+using ECommerce.Application.Interfaces.Services;
 using ECommerce.Domain.Entities;
 using MediatR;
 
@@ -11,11 +12,13 @@ namespace ECommerce.Application.Features.Orders.Commands.CreateOrder
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IStripeService _stripeService;
 
-        public CreateOrderCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public CreateOrderCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IStripeService stripeService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _stripeService = stripeService;
         }
 
         public async Task<ResultResponse<Guid>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -27,6 +30,7 @@ namespace ECommerce.Application.Features.Orders.Commands.CreateOrder
                 decimal total = 0;
                 // add order
                 Order order = _mapper.Map<Order>(request);
+                order.Status = "Pending";
                 await _unitOfWork.Order.AddAsync(order);
 
 
@@ -56,12 +60,13 @@ namespace ECommerce.Application.Features.Orders.Commands.CreateOrder
                     total += product.Price * item.Quantity;
                 }
 
+                //StripePaymentIntentResult paymentIntent = await _stripeService.CreatePaymentIntentAsync(request, total);
 
-                // add payment
-                Payment payment = _mapper.Map<Payment>(request.Payment);
-                payment.StripePaymentIntentId = "testtt";
-                payment.OrderId = order.Id;
-                await _unitOfWork.Payment.AddAsync(payment);
+                //// add payment
+                //Payment payment = _mapper.Map<Payment>(request.Payment);
+                //payment.StripePaymentIntentId = paymentIntent.PaymentIntentId;
+                //payment.OrderId = order.Id;
+                //await _unitOfWork.Payment.AddAsync(payment);
 
                 order.TotalAmount = total;
 

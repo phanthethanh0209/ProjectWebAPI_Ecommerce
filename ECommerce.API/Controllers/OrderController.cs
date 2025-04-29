@@ -16,7 +16,7 @@ namespace ECommerce.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("CreateOrder")]
+        [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderCommand command)
         {
             ResultResponse<Guid> result = await _mediator.Send(command);

@@ -35,7 +35,7 @@ namespace ECommerce.Application.Features.Orders.Commands.CreateOrder
 
 
                 // add order items
-                foreach (CreateOrderItemDTO item in request.OrderItems)
+                foreach (OrderItemDTO item in request.OrderItems)
                 {
                     // check product out of stock
                     Product product = await _unitOfWork.Product.GetFirstOrDefaultAsync(t => t.Id.Equals(item.ProductId));
@@ -59,14 +59,6 @@ namespace ECommerce.Application.Features.Orders.Commands.CreateOrder
                     // set total amount for order
                     total += product.Price * item.Quantity;
                 }
-
-                //StripePaymentIntentResult paymentIntent = await _stripeService.CreatePaymentIntentAsync(request, total);
-
-                //// add payment
-                //Payment payment = _mapper.Map<Payment>(request.Payment);
-                //payment.StripePaymentIntentId = paymentIntent.PaymentIntentId;
-                //payment.OrderId = order.Id;
-                //await _unitOfWork.Payment.AddAsync(payment);
 
                 order.TotalAmount = total;
 

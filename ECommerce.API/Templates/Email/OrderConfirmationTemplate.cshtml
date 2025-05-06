@@ -1,0 +1,39 @@
+﻿<!--Subject: Payment Successful - Your Order is Being Processed-->
+@model ECommerce.Infrastructure.Services.EmailService.OrderEmailDTO
+
+<html>
+<body>
+    <h3>Dear @Model.Username,</h3>
+    <p>Thank you for your payment! Your order (ID: @Model.OrderId) is now being processed.</p>
+    <h4>Order Details:</h4>
+    <ul>
+        <li>Total Amount: @Model.TotalAmount </li>
+        <li>Shipping Address: @Model.ShippingAddress</li>
+        <li>Order Date: @Model.OrderDate</li>
+    </ul>
+
+    @* <h4>Products:</h4>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Unit Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.UnitPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table> *@
+
+    <p>You can track your order status in your account.</p>
+    <p>Best regards,<br>Thanh ECommerce Team</p>
+</body>
+</html>

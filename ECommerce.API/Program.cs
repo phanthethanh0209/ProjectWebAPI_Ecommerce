@@ -1,6 +1,7 @@
 using ECommerce.API.Middleware;
 using ECommerce.Application;
 using ECommerce.Infrastructure;
+using Hangfire;
 namespace ECommerce.API
 {
     public class Program
@@ -37,6 +38,8 @@ namespace ECommerce.API
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.UseHangfireDashboard("/hangfire");
 
             app.Run();
         }

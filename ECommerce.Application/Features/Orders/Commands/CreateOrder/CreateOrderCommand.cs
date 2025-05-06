@@ -10,7 +10,7 @@ namespace ECommerce.Application.Features.Orders.Commands.CreateOrder
         public Guid UserId { get; set; }
         public string ShippingAddress { get; set; }
         //public string Status { get; set; }
-        public List<CreateOrderItemDTO> OrderItems { get; set; }
+        public List<OrderItemDTO> OrderItems { get; set; }
         //public PaymentDTO Payment { get; set; }
     }
 }

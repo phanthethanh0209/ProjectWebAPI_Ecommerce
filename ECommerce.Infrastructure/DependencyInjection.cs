@@ -1,10 +1,14 @@
 ﻿using ECommerce.Application.Interfaces;
+using ECommerce.Application.Interfaces.BackgroundJobs;
 using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Services;
 using ECommerce.Infrastructure.Authentication;
+using ECommerce.Infrastructure.BackgroundJobs.OrderBackgroundService;
 using ECommerce.Infrastructure.Data;
 using ECommerce.Infrastructure.Repositories;
-using ECommerce.Infrastructure.Services;
+using ECommerce.Infrastructure.Services.EmailService;
+using ECommerce.Infrastructure.Services.StripeService;
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -58,6 +62,16 @@ namespace ECommerce.Infrastructure
                 });
 
             services.AddScoped<IStripeService, StripeService>();
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IOrderBackgroundService, OrderBackgroundService>();
+            services.Configure<EmailSettings>(configuration.GetSection("SmtpSettings"));
+
+            // config Hangfire
+            services.AddHangfire(x =>
+            {
+                x.UseSqlServerStorage(connectionString);
+            });
+            services.AddHangfireServer();
 
             return services;
         }

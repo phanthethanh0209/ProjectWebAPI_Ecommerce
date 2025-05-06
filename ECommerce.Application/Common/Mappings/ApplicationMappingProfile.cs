@@ -28,10 +28,11 @@ namespace ECommerce.Application.Common.Mappings
 
             // Mapping Order
             CreateMap<CreateOrderCommand, Order>()
-                .ForMember(dest => dest.OrderItems, opt => opt.Ignore());
+                .ForMember(dest => dest.OrderItems, opt => opt.Ignore())
+                .ForMember(t => t.UpdateAt, opt => opt.Ignore());
 
             // Mapping OrderItem
-            CreateMap<CreateOrderItemDTO, OrderItem>();
+            CreateMap<OrderItemDTO, OrderItem>();
 
             // Mapping Payment
             CreateMap<PaymentDTO, Payment>();

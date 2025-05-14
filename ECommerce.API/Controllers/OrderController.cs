@@ -1,6 +1,7 @@
 ﻿using ECommerce.Application.Common.Responses;
 using ECommerce.Application.Features.Orders.Commands.CreateOrder;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.API.Controllers
@@ -16,6 +17,7 @@ namespace ECommerce.API.Controllers
             _mediator = mediator;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderCommand command)
         {
@@ -25,6 +27,7 @@ namespace ECommerce.API.Controllers
             return result.IsSuccess ? Ok(result.Data) : BadRequest(result.ErrorMessage);
         }
 
+        [Authorize]
         [HttpGet]
         public Task<IActionResult> GetOrderById()
         {

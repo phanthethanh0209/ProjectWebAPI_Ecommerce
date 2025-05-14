@@ -7,7 +7,7 @@ namespace ECommerce.Infrastructure.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly ApplicationDbContext _db;
+        protected readonly ApplicationDbContext _db;
         private readonly DbSet<T> _dbSet;
 
         public GenericRepository(ApplicationDbContext db)

@@ -1,6 +1,8 @@
 ﻿using ECommerce.Application.Interfaces.Repositories;
+using ECommerce.Application.Interfaces.Repositories.CartRepository;
 using ECommerce.Domain.Entities;
 using ECommerce.Infrastructure.Data;
+using ECommerce.Infrastructure.Repositories.CartRepo;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace ECommerce.Infrastructure.Repositories
@@ -16,8 +18,7 @@ namespace ECommerce.Infrastructure.Repositories
         public IGenericRepository<RefreshToken> RefreshToken { get; private set; }
 
         public IGenericRepository<Category> Category { get; private set; }
-
-        public IGenericRepository<Cart> Cart { get; private set; }
+        public ICartRepository Carts { get; private set; }
 
         public IGenericRepository<Product> Product { get; private set; }
 
@@ -36,7 +37,7 @@ namespace ECommerce.Infrastructure.Repositories
             User = new GenericRepository<User>(db);
             RefreshToken = new GenericRepository<RefreshToken>(_db);
             Category = new GenericRepository<Category>(_db);
-            Cart = new GenericRepository<Cart>(_db);
+            Carts = new CartRepository(_db);
             Product = new GenericRepository<Product>(_db);
             CartItem = new GenericRepository<CartItem>(_db);
             Order = new GenericRepository<Order>(_db);

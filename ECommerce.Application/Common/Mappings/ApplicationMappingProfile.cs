@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using ECommerce.Application.Features.Carts.Commands.AddToCart;
+using ECommerce.Application.Features.Carts.Commands.UpdateCart;
+using ECommerce.Application.Features.Carts.DTOs;
 using ECommerce.Application.Features.Orders.Commands.CreateOrder;
 using ECommerce.Application.Features.Orders.DTOs;
 using ECommerce.Application.Features.Products.Commands.CreateProduct;
@@ -36,6 +39,12 @@ namespace ECommerce.Application.Common.Mappings
 
             // Mapping Payment
             CreateMap<PaymentDTO, Payment>();
+
+            // Mapping Cart
+            CreateMap<AddToCartCommand, CartItem>().ReverseMap();
+            CreateMap<Cart, CartDTO>();
+            CreateMap<CartItem, CartItemDTO>();
+            CreateMap<UpdateCartCommand, CartItem>();
 
         }
     }

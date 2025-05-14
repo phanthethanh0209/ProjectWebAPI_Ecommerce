@@ -52,34 +52,67 @@ namespace ECommerce.Infrastructure.Services.StripeService
             if (paymentIntent == null) return;
 
             Payment payment = await _unitOfWork.Payment.GetFirstOrDefaultAsync(t => t.StripePaymentIntentId.Equals(paymentIntent.Id));
-
             if (payment == null) return;
-            Order order = await _unitOfWork.Order.GetFirstOrDefaultAsync(t => t.Id.Equals(payment.OrderId));
+
+            Order order = await _unitOfWork.Order.GetFirstOrDefaultAsync(t => t.Id.Equals(payment.OrderId), items => items.OrderItems);
 
             if (stripeEvent.Type == "payment_intent.succeeded")
             {
                 // update payment and order status 
-                payment.PaymentStatus = "Completed";
-                await _unitOfWork.Payment.Update(payment);
+                await _unitOfWork.BeginTransactionAsync();
+                try
+                {
+                    payment.PaymentStatus = "Completed";
+                    await _unitOfWork.Payment.Update(payment);
 
-                order.Status = "Processing";
-                order.UpdateAt = DateTime.UtcNow;
-                await _unitOfWork.Order.Update(order);
+                    order.Status = "Processing";
+                    order.UpdateAt = DateTime.UtcNow;
+                    await _unitOfWork.Order.Update(order);
 
-                await _unitOfWork.SaveChangesAsync();
+                    // update quantity product
+                    foreach (OrderItem item in order.OrderItems)
+                    {
+                        Domain.Entities.Product product = await _unitOfWork.Product.GetFirstOrDefaultAsync(t => t.Id.Equals(item.ProductId));
+                        if (product == null)
+                            throw new Exception($"Product with ID {item.ProductId} not found");
 
-                _backgroundJobClient.Enqueue<IOrderBackgroundService>(x => x.SendOrderConfirmationEmail(order.Id));
+                        product.StockQuantity -= item.Quantity;
+                        await _unitOfWork.Product.Update(product);
+                    }
+
+                    // delete product in cart
+
+
+                    // send email with mailkit use backgroundjob (fire and forget)
+                    _backgroundJobClient.Enqueue<IOrderBackgroundService>(x => x.SendOrderConfirmationEmail(order.Id));
+
+                    await _unitOfWork.CommitTransactionAsync();
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackTransactionAsync();
+                    throw new Exception($"Failed to handle payment failed event: {ex.Message}", ex);
+                }
             }
             else if (stripeEvent.Type == "payment_intent.payment_failed")
             {
-                payment.PaymentStatus = "Failed";
-                await _unitOfWork.Payment.Update(payment);
+                await _unitOfWork.BeginTransactionAsync();
+                try
+                {
+                    payment.PaymentStatus = "Failed";
+                    await _unitOfWork.Payment.Update(payment);
 
-                order.Status = "PaymentFailed";
-                order.UpdateAt = DateTime.UtcNow;
-                await _unitOfWork.Order.Update(order);
+                    order.Status = "PaymentFailed";
+                    order.UpdateAt = DateTime.UtcNow;
+                    await _unitOfWork.Order.Update(order);
 
-                await _unitOfWork.SaveChangesAsync();
+                    await _unitOfWork.CommitTransactionAsync();
+                }
+                catch (Exception ex)
+                {
+                    await _unitOfWork.RollbackTransactionAsync();
+                    throw new Exception($"Failed to handle payment failed event: {ex.Message}", ex);
+                }
             }
         }
     }

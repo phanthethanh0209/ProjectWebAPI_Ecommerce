@@ -1,4 +1,5 @@
-﻿using ECommerce.Domain.Entities;
+﻿using ECommerce.Application.Interfaces.Repositories.CartRepository;
+using ECommerce.Domain.Entities;
 
 namespace ECommerce.Application.Interfaces.Repositories
 {
@@ -7,7 +8,8 @@ namespace ECommerce.Application.Interfaces.Repositories
         IGenericRepository<User> User { get; }
         IGenericRepository<RefreshToken> RefreshToken { get; }
         IGenericRepository<Category> Category { get; }
-        IGenericRepository<Cart> Cart { get; }
+        //IGenericRepository<Cart> Cart { get; }
+        ICartRepository Carts { get; }
         IGenericRepository<Product> Product { get; }
         //IProductRepository<Product> Product { get; }
         IGenericRepository<CartItem> CartItem { get; }

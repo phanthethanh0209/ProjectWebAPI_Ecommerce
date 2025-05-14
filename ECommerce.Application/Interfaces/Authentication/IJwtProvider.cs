@@ -1,7 +1,7 @@
 ﻿using ECommerce.Application.Features.Authentication.DTOs;
 using ECommerce.Domain.Entities;
 
-namespace ECommerce.Application.Interfaces
+namespace ECommerce.Application.Interfaces.Authentication
 {
     public interface IJwtProvider
     {

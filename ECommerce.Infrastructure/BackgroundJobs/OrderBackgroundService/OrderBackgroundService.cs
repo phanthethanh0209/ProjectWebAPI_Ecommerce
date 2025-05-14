@@ -3,6 +3,7 @@ using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Services;
 using ECommerce.Domain.Entities;
 using Microsoft.Extensions.Logging;
+using Stripe;
 using System.Globalization;
 
 namespace ECommerce.Infrastructure.BackgroundJobs.OrderBackgroundService
@@ -13,7 +14,9 @@ namespace ECommerce.Infrastructure.BackgroundJobs.OrderBackgroundService
         private readonly IEmailService _emailService;
         private readonly ILogger<OrderBackgroundService> _logger;
 
-        public OrderBackgroundService(IUnitOfWork unitOfWork, ILogger<OrderBackgroundService> logger, IEmailService emailService)
+
+        public OrderBackgroundService(IUnitOfWork unitOfWork, ILogger<OrderBackgroundService> logger,
+            IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
@@ -56,5 +59,49 @@ namespace ECommerce.Infrastructure.BackgroundJobs.OrderBackgroundService
             await _emailService.SendEmailAsync(model.ToEmail, subject, body);
 
         }
+
+        public async Task ScheduleCancelOrderJob(Guid orderId)
+        {
+            await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                Order order = await _unitOfWork.Order.GetFirstOrDefaultAsync(t => t.Id == orderId);
+                if (order == null || order.Status != "Pending")
+                {
+                    // log
+                    return;
+                }
+
+                Payment payment = await _unitOfWork.Payment.GetFirstOrDefaultAsync(t => t.OrderId == orderId);
+                if (payment == null || payment.PaymentStatus != "Pending")
+                {
+                    // log
+                    return;
+                }
+
+                // update status Order and Payment
+                order.Status = "Cancelled";
+                order.UpdateAt = DateTime.UtcNow;
+
+                payment.PaymentStatus = "Cancelled";
+
+                await _unitOfWork.Order.Update(order);
+                await _unitOfWork.Payment.Update(payment);
+
+                // update Stripe
+                PaymentIntentService service = new();
+                await service.CancelAsync(payment.StripePaymentIntentId);
+
+                await _unitOfWork.CommitTransactionAsync();
+            }
+            catch (Exception ex)
+            {
+                // log
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+
+        }
+
     }
 }

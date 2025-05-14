@@ -19,14 +19,29 @@ namespace ECommerce.Application.Features.Users.Commands.Register
 
         public async Task<ResultResponse<Guid>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            User user = _mapper.Map<User>(request);
-            // hash password 
-            user.Password = BCrypt.Net.BCrypt.HashPassword(request.password);
+            await _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                User user = _mapper.Map<User>(request);
+                // hash password 
+                user.Password = BCrypt.Net.BCrypt.HashPassword(request.password);
+                await _unitOfWork.User.AddAsync(user);
 
-            await _unitOfWork.User.AddAsync(user);
-            await _unitOfWork.SaveChangesAsync();
+                Cart cart = new()
+                {
+                    UserId = user.Id,
+                    TotalAmount = 0
+                };
+                await _unitOfWork.Carts.AddAsync(cart);
 
-            return ResultResponse<Guid>.SuccessResponse(user.Id);
+                await _unitOfWork.CommitTransactionAsync();
+                return ResultResponse<Guid>.SuccessResponse(user.Id);
+            }
+            catch (Exception ex)
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw new Exception("Failed to create user and cart", ex);
+            }
         }
     }
 }

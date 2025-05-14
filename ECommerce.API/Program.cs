@@ -20,6 +20,8 @@ namespace ECommerce.API
             // Configure Infrastructure and application layer
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();
+            builder.Services.AddHttpContextAccessor();
+
 
             WebApplication app = builder.Build();
 

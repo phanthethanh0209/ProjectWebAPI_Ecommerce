@@ -1,6 +1,6 @@
 ﻿using ECommerce.Application.Common.Responses;
 using ECommerce.Application.Features.Authentication.DTOs;
-using ECommerce.Application.Interfaces;
+using ECommerce.Application.Interfaces.Authentication;
 using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Domain.Entities;
 using MediatR;

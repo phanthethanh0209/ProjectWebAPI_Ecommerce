@@ -40,7 +40,7 @@ namespace ECommerce.Infrastructure.Data
 
                 e.HasOne(e => e.User)
                     .WithOne(u => u.Cart)
-                    .HasForeignKey<Cart>(fk => fk.Id); // Cart dùng Id làm FK
+                    .HasForeignKey<Cart>(fk => fk.UserId); // Cart dùng UserId làm FK
             });
 
             modelBuilder.Entity<Category>(e =>

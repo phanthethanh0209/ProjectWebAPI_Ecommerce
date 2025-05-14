@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ECommerce.Application.Common.Responses;
 using ECommerce.Application.Features.Orders.DTOs;
+using ECommerce.Application.Interfaces.BackgroundJobs;
 using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Services;
 using ECommerce.Domain.Entities;
@@ -13,12 +14,14 @@ namespace ECommerce.Application.Features.Orders.Commands.CreateOrder
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IStripeService _stripeService;
+        private readonly IBackgroundService _backgroundService;
 
-        public CreateOrderCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IStripeService stripeService)
+        public CreateOrderCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IStripeService stripeService, IBackgroundService backgroundService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _stripeService = stripeService;
+            _backgroundService = backgroundService;
         }
 
         public async Task<ResultResponse<Guid>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -31,8 +34,8 @@ namespace ECommerce.Application.Features.Orders.Commands.CreateOrder
                 // add order
                 Order order = _mapper.Map<Order>(request);
                 order.Status = "Pending";
+                //order.Status = OrderStatus.Pending;
                 await _unitOfWork.Order.AddAsync(order);
-
 
                 // add order items
                 foreach (OrderItemDTO item in request.OrderItems)
@@ -52,15 +55,14 @@ namespace ECommerce.Application.Features.Orders.Commands.CreateOrder
                     orderItem.OrderId = order.Id;
                     await _unitOfWork.OrderItem.AddAsync(orderItem);
 
-                    // update quantity product
-                    product.StockQuantity -= item.Quantity;
-                    await _unitOfWork.Product.Update(product);
-
                     // set total amount for order
                     total += product.Price * item.Quantity;
                 }
 
                 order.TotalAmount = total;
+
+                // setup delayed job (scheduled job with hangfire)
+                _backgroundService.Schedule<IOrderBackgroundService>(t => t.ScheduleCancelOrderJob(order.Id), TimeSpan.FromMinutes(15));
 
                 // save change and commit
                 await _unitOfWork.CommitTransactionAsync();

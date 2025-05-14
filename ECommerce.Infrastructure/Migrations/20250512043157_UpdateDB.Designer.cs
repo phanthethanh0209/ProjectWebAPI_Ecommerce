@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250423064351_UpdateDB")]
+    [Migration("20250512043157_UpdateDB")]
     partial class UpdateDB
     {
         /// <inheritdoc />
@@ -28,12 +28,22 @@ namespace ECommerce.Infrastructure.Migrations
             modelBuilder.Entity("ECommerce.Domain.Entities.Cart", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Cart", (string)null);
                 });
@@ -353,7 +363,7 @@ namespace ECommerce.Infrastructure.Migrations
                 {
                     b.HasOne("ECommerce.Domain.Entities.User", "User")
                         .WithOne("Cart")
-                        .HasForeignKey("ECommerce.Domain.Entities.Cart", "Id")
+                        .HasForeignKey("ECommerce.Domain.Entities.Cart", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

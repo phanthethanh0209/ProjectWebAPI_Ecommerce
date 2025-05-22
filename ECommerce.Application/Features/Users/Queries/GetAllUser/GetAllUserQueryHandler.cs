@@ -7,7 +7,7 @@ using MediatR;
 
 namespace ECommerce.Application.Features.Users.Queries.GetAllUser
 {
-    public class GetAllUserQueryHandler : IRequestHandler<GetAllUserQuery, ResultResponse<IEnumerable<GetUserResponse>>>
+    public class GetAllUserQueryHandler : IRequestHandler<GetAllUserQuery, ResultResponse<PagedList<GetUserResponse>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -18,13 +18,14 @@ namespace ECommerce.Application.Features.Users.Queries.GetAllUser
             _mapper = mapper;
         }
 
-        public async Task<ResultResponse<IEnumerable<GetUserResponse>>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
+        public async Task<ResultResponse<PagedList<GetUserResponse>>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<User> users = await _unitOfWork.User.GetAllAsync(null, request.pageNummber, request.limit);
-            if (!users.Any()) return ResultResponse<IEnumerable<GetUserResponse>>.FailResponse("Users not found");
+            IEnumerable<User> users = await _unitOfWork.User.GetAllAsync(null);
+            if (!users.Any()) return ResultResponse<PagedList<GetUserResponse>>.FailResponse("Users not found");
 
             IEnumerable<GetUserResponse> usersResponse = _mapper.Map<IEnumerable<GetUserResponse>>(users);
-            return ResultResponse<IEnumerable<GetUserResponse>>.SuccessResponse(usersResponse);
+            PagedList<GetUserResponse> result = PagedList<GetUserResponse>.CreateAsync(usersResponse, request.pageNumber, request.pageSize);
+            return ResultResponse<PagedList<GetUserResponse>>.SuccessResponse(result);
         }
     }
 }

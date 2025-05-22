@@ -4,8 +4,8 @@ using ECommerce.Application.Features.Products.Commands.UpdateProduct;
 using ECommerce.Application.Features.Products.DTOs;
 using ECommerce.Application.Features.Products.Queries.GetAllProducts;
 using ECommerce.Application.Features.Products.Queries.GetProductById;
+using ECommerce.Infrastructure.Authentication;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.API.Controllers
@@ -22,9 +22,9 @@ namespace ECommerce.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProduct([FromQuery] int pageNumber = 1, [FromQuery] int limit = 5)
+        public async Task<IActionResult> GetAllProduct([FromQuery] GetAllProductsQuery query)
         {
-            ResultResponse<IEnumerable<GetProductResponse>> result = await _mediator.Send(new GetAllProductsQuery(pageNumber, limit));
+            ResultResponse<PagedList<GetProductResponse>> result = await _mediator.Send(query);
             return result.IsSuccess ? Ok(result.Data) : NotFound(result.ErrorMessage);
         }
 
@@ -35,7 +35,7 @@ namespace ECommerce.API.Controllers
             return result.IsSuccess ? Ok(result.Data) : NotFound(result.ErrorMessage);
         }
 
-        [Authorize]
+        [HasPermission(new[] { "View.Product" })]
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand command)
         {
@@ -46,7 +46,7 @@ namespace ECommerce.API.Controllers
                 CreatedAtAction(nameof(GetProductById), new { id = result.Data }, result.Data) : BadRequest(result.ErrorMessage);
         }
 
-        [Authorize]
+        [HasPermission(new[] { "Update.Product" })]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct([FromRoute] Guid id, [FromBody] UpdateProductCommand command)
         {
@@ -56,7 +56,7 @@ namespace ECommerce.API.Controllers
             return result.IsSuccess ? Ok(result.Data) : NotFound(result.ErrorMessage);
         }
 
-        [Authorize]
+        [HasPermission(new[] { "Delete.Product" })]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct([FromRoute] Guid id)
         {

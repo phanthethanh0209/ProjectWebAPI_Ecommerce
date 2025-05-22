@@ -1,5 +1,10 @@
 ﻿using ECommerce.Application.Common.Responses;
 using ECommerce.Application.Features.Orders.Commands.CreateOrder;
+using ECommerce.Application.Features.Orders.DTOs;
+using ECommerce.Application.Features.Orders.Queries.GetOrderById;
+using ECommerce.Application.Features.Orders.Queries.GetOrders;
+using ECommerce.Application.Features.Orders.Queries.GetUserOrderHistory;
+using ECommerce.Infrastructure.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +23,7 @@ namespace ECommerce.API.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpPost("checkout")]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderCommand command)
         {
             ResultResponse<Guid> result = await _mediator.Send(command);
@@ -28,10 +33,27 @@ namespace ECommerce.API.Controllers
         }
 
         [Authorize]
-        [HttpGet]
-        public Task<IActionResult> GetOrderById()
+        [HttpGet("{orderId}")]
+        public async Task<IActionResult> GetOrderById([FromRoute] Guid orderId)
         {
-            throw new NotImplementedException();
+            ResultResponse<OrderDTO> result = await _mediator.Send(new GetOrderByIdQuery(orderId));
+            return result.IsSuccess ? Ok(result.Data) : BadRequest(result.ErrorMessage);
+        }
+
+        [Authorize]
+        [HttpGet("history")]
+        public async Task<IActionResult> GetUserOrderHistory([FromQuery] GetUserOrderHistoryQuery query)
+        {
+            ResultResponse<PagedList<OrderDTO>> result = await _mediator.Send(query);
+            return result.IsSuccess ? Ok(result.Data) : BadRequest(result.ErrorMessage);
+        }
+
+        [HasPermission(new[] { "View.Order" })]
+        [HttpGet]
+        public async Task<IActionResult> GetOrders([FromQuery] GetOrdersQuery query)
+        {
+            ResultResponse<PagedList<OrderDTO>> result = await _mediator.Send(query);
+            return result.IsSuccess ? Ok(result.Data) : BadRequest(result.ErrorMessage);
         }
     }
 }

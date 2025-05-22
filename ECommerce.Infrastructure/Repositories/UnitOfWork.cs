@@ -1,8 +1,14 @@
 ﻿using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Repositories.CartRepository;
+using ECommerce.Application.Interfaces.Repositories.OrderRepository;
+using ECommerce.Application.Interfaces.Repositories.PermissionRepository;
+using ECommerce.Application.Interfaces.Repositories.RoleRepository;
 using ECommerce.Domain.Entities;
 using ECommerce.Infrastructure.Data;
 using ECommerce.Infrastructure.Repositories.CartRepo;
+using ECommerce.Infrastructure.Repositories.OrderRepo;
+using ECommerce.Infrastructure.Repositories.PermissionRepo;
+using ECommerce.Infrastructure.Repositories.RoleRepo;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace ECommerce.Infrastructure.Repositories
@@ -24,11 +30,15 @@ namespace ECommerce.Infrastructure.Repositories
 
         public IGenericRepository<CartItem> CartItem { get; private set; }
 
-        public IGenericRepository<Order> Order { get; private set; }
+        public IOrderRepository Orders { get; private set; }
 
         public IGenericRepository<OrderItem> OrderItem { get; private set; }
 
         public IGenericRepository<Payment> Payment { get; private set; }
+        public IRoleRepository Roles { get; private set; }
+        public IPermissionRepository Permissions { get; private set; }
+        public IGenericRepository<UserRole> UserRole { get; private set; }
+        public IGenericRepository<RolePermission> RolePermission { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -40,9 +50,13 @@ namespace ECommerce.Infrastructure.Repositories
             Carts = new CartRepository(_db);
             Product = new GenericRepository<Product>(_db);
             CartItem = new GenericRepository<CartItem>(_db);
-            Order = new GenericRepository<Order>(_db);
+            Orders = new OrderRepository(_db);
             OrderItem = new GenericRepository<OrderItem>(_db);
             Payment = new GenericRepository<Payment>(_db);
+            Roles = new RoleRepository(_db); ;
+            Permissions = new PermissionRepository(_db);
+            UserRole = new GenericRepository<UserRole>(_db);
+            RolePermission = new GenericRepository<RolePermission>(_db);
         }
 
 

@@ -27,6 +27,7 @@ namespace ECommerce.Application.Features.Categories.Commands.UpdateCategory
                 throw new NotFoundException("Category", request.Id);
             }
 
+            _mapper.Map(request, category);
             await _unitOfWork.Category.Update(category);
             await _unitOfWork.SaveChangesAsync();
 

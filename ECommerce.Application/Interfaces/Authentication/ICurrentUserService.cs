@@ -3,5 +3,6 @@
     public interface ICurrentUserService
     {
         Guid GetUserIdForClaims();
+        bool IsInRole(string role);
     }
 }

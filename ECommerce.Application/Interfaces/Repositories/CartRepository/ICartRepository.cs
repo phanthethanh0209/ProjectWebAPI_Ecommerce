@@ -7,5 +7,6 @@ namespace ECommerce.Application.Interfaces.Repositories.CartRepository
         Task<Cart?> GetCartByUserIdWithItemsAsync(Guid userId);
         Task<CartItem?> GetCartItemByProductIdAsync(Guid cartId, Guid productId);
         Task ClearCartAsync(Guid cartId);
+        Task RemoveCartItemsAsync(Guid cartId, List<Guid> productIds);
     }
 }

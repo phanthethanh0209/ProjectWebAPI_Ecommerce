@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250512043157_UpdateDB")]
-    partial class UpdateDB
+    [Migration("20250520064521_dbUpdateAuthorization")]
+    partial class dbUpdateAuthorization
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,14 +138,13 @@ namespace ECommerce.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("UpdateAt")
+                    b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("UserId")
@@ -195,9 +194,8 @@ namespace ECommerce.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PaymentStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("StripePaymentIntentId")
                         .IsRequired()
@@ -209,6 +207,51 @@ namespace ECommerce.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Payment", (string)null);
+                });
+
+            modelBuilder.Entity("ECommerce.Domain.Entities.Permission", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Permission", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b867733f-fbbb-410b-b7f6-0c667d40a229"),
+                            Description = "View data",
+                            Name = "Read"
+                        },
+                        new
+                        {
+                            Id = new Guid("3ef0841e-bd88-4e27-8642-603c805462f9"),
+                            Description = "Add new data",
+                            Name = "Create"
+                        },
+                        new
+                        {
+                            Id = new Guid("34ae215d-c182-4c9f-b745-b8986d36dc36"),
+                            Description = "Modify data",
+                            Name = "Update"
+                        },
+                        new
+                        {
+                            Id = new Guid("95747c1e-fc1f-48ec-b108-34af7da5bce2"),
+                            Description = "Remove data",
+                            Name = "Delete"
+                        });
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.Product", b =>
@@ -315,6 +358,56 @@ namespace ECommerce.Infrastructure.Migrations
                     b.ToTable("RefreshToken", (string)null);
                 });
 
+            modelBuilder.Entity("ECommerce.Domain.Entities.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("a6f25e26-400e-4e55-97b3-94ac35fd32ee"),
+                            Name = "Customer"
+                        },
+                        new
+                        {
+                            Id = new Guid("fcd2fb03-484d-4c67-9940-bf4668619e9d"),
+                            Name = "Manager"
+                        });
+                });
+
+            modelBuilder.Entity("ECommerce.Domain.Entities.RolePermission", b =>
+                {
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PermissionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RoleId", "PermissionId");
+
+                    b.HasIndex("PermissionId");
+
+                    b.ToTable("RolePermission", (string)null);
+                });
+
             modelBuilder.Entity("ECommerce.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -356,6 +449,28 @@ namespace ECommerce.Infrastructure.Migrations
                             Name = "Thanh",
                             Password = "$2a$11$0/CP8hh.odVCJCJi0d261ObBVpXQ06FuX53Aiq6Fn.0pKKdcdnMz2",
                             Phone = "0985632147"
+                        });
+                });
+
+            modelBuilder.Entity("ECommerce.Domain.Entities.UserRole", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("UserRole", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("d1407a13-ad60-48ad-8346-8fba9cbb4f41"),
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf")
                         });
                 });
 
@@ -452,6 +567,44 @@ namespace ECommerce.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ECommerce.Domain.Entities.RolePermission", b =>
+                {
+                    b.HasOne("ECommerce.Domain.Entities.Permission", "Permission")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerce.Domain.Entities.Role", "Role")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Permission");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("ECommerce.Domain.Entities.UserRole", b =>
+                {
+                    b.HasOne("ECommerce.Domain.Entities.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerce.Domain.Entities.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ECommerce.Domain.Entities.Cart", b =>
                 {
                     b.Navigation("CartItems");
@@ -470,11 +623,23 @@ namespace ECommerce.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ECommerce.Domain.Entities.Permission", b =>
+                {
+                    b.Navigation("RolePermissions");
+                });
+
             modelBuilder.Entity("ECommerce.Domain.Entities.Product", b =>
                 {
                     b.Navigation("CartItems");
 
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("ECommerce.Domain.Entities.Role", b =>
+                {
+                    b.Navigation("RolePermissions");
+
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.User", b =>
@@ -485,6 +650,8 @@ namespace ECommerce.Infrastructure.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("RefreshTokens");
+
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

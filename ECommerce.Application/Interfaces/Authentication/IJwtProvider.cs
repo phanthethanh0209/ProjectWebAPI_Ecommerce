@@ -5,7 +5,7 @@ namespace ECommerce.Application.Interfaces.Authentication
 {
     public interface IJwtProvider
     {
-        string GenerateAccessToken(User user);
+        Task<string> GenerateAccessToken(User user);
         string GenerateRefreshToken();
         Task<LoginResponse> GenerateToken(User user);
     }

@@ -1,12 +1,14 @@
 ﻿using ECommerce.Application.Features.Payments.Commands.CreatePayment;
 using ECommerce.Application.Features.Payments.DTOs;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PaymentController : ControllerBase
     {
         private readonly IMediator _mediator;

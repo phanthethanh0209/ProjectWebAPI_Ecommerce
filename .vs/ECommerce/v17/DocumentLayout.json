@@ -7,36 +7,68 @@
       "RelativeMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\features\\carts\\commands\\removeitem\\removeitemcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\features\\carts\\commands\\removeitem\\removeitemcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\features\\carts\\commands\\removeitem\\removeitemcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\features\\carts\\commands\\removeitem\\removeitemcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.api\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\features\\carts\\commands\\addtocart\\addtocartcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\features\\carts\\commands\\addtocart\\addtocartcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.api\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\features\\orders\\queries\\getorders\\getordersquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\features\\orders\\queries\\getorders\\getordersquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.api\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\features\\users\\queries\\getalluser\\getalluserqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\features\\users\\queries\\getalluser\\getalluserqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\features\\users\\queries\\getalluser\\getalluserquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\features\\users\\queries\\getalluser\\getalluserquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\features\\products\\queries\\getallproducts\\getallproductsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\features\\products\\queries\\getallproducts\\getallproductsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\features\\products\\queries\\getallproducts\\getallproductsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\features\\products\\queries\\getallproducts\\getallproductsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\features\\categories\\queries\\getallcategory\\getallcategoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\features\\categories\\queries\\getallcategory\\getallcategoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\interfaces\\repositories\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\interfaces\\repositories\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{85D21B95-A16F-43CA-8A03-522DA99E14E9}|ECommerce.Infrastructure\\ECommerce.Infrastructure.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.infrastructure\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{85D21B95-A16F-43CA-8A03-522DA99E14E9}|ECommerce.Infrastructure\\ECommerce.Infrastructure.csproj|solutionrelative:ecommerce.infrastructure\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\interfaces\\repositories\\cartrepository\\icartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\interfaces\\repositories\\cartrepository\\icartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\features\\orders\\queries\\getorders\\getordersqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\features\\orders\\queries\\getorders\\getordersqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\interfaces\\repositories\\productrepository\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\interfaces\\repositories\\productrepository\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\features\\categories\\queries\\getallcategory\\getallcategoryquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\features\\categories\\queries\\getallcategory\\getallcategoryquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.application\\features\\carts\\commands\\clearcart\\clearcartcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FDD71745-8301-4EDE-AA49-5732982E9396}|ECommerce.Application\\ECommerce.Application.csproj|solutionrelative:ecommerce.application\\features\\carts\\commands\\clearcart\\clearcartcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.api\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8D3A97A1-29BC-452E-8DC3-47D155328FAC}|ECommerce.API\\ECommerce.API.csproj|solutionrelative:ecommerce.api\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{85D21B95-A16F-43CA-8A03-522DA99E14E9}|ECommerce.Infrastructure\\ECommerce.Infrastructure.csproj|d:\\asp.net core web api\\up_github\\projectwebapi_ecommerce\\ecommerce.infrastructure\\repositories\\orderrepo\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85D21B95-A16F-43CA-8A03-522DA99E14E9}|ECommerce.Infrastructure\\ECommerce.Infrastructure.csproj|solutionrelative:ecommerce.infrastructure\\repositories\\orderrepo\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,104 +90,200 @@
               "RelativeToolTip": "ECommerce.API\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-14T07:42:55.028Z",
+              "WhenOpened": "2025-05-22T09:02:04.024Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "RemoveItemCommandHandler.cs",
-              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Carts\\Commands\\RemoveItem\\RemoveItemCommandHandler.cs",
-              "RelativeDocumentMoniker": "ECommerce.Application\\Features\\Carts\\Commands\\RemoveItem\\RemoveItemCommandHandler.cs",
-              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Carts\\Commands\\RemoveItem\\RemoveItemCommandHandler.cs",
-              "RelativeToolTip": "ECommerce.Application\\Features\\Carts\\Commands\\RemoveItem\\RemoveItemCommandHandler.cs",
-              "ViewState": "AQIAAB0AAAAAAAAAAAAswC4AAABFAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.API\\Program.cs",
+              "RelativeDocumentMoniker": "ECommerce.API\\Program.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.API\\Program.cs",
+              "RelativeToolTip": "ECommerce.API\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T07:32:48.666Z"
+              "WhenOpened": "2025-05-22T09:01:55.522Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RemoveItemCommand.cs",
-              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Carts\\Commands\\RemoveItem\\RemoveItemCommand.cs",
-              "RelativeDocumentMoniker": "ECommerce.Application\\Features\\Carts\\Commands\\RemoveItem\\RemoveItemCommand.cs",
-              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Carts\\Commands\\RemoveItem\\RemoveItemCommand.cs",
-              "RelativeToolTip": "ECommerce.Application\\Features\\Carts\\Commands\\RemoveItem\\RemoveItemCommand.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 5,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.API\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "ECommerce.API\\Controllers\\OrderController.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.API\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "ECommerce.API\\Controllers\\OrderController.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAYwDQAAABNAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T07:32:44.912Z"
+              "WhenOpened": "2025-05-22T08:57:02.754Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GetAllUserQuery.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Users\\Queries\\GetAllUser\\GetAllUserQuery.cs",
+              "RelativeDocumentMoniker": "ECommerce.Application\\Features\\Users\\Queries\\GetAllUser\\GetAllUserQuery.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Users\\Queries\\GetAllUser\\GetAllUserQuery.cs",
+              "RelativeToolTip": "ECommerce.Application\\Features\\Users\\Queries\\GetAllUser\\GetAllUserQuery.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAYAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T08:51:07.085Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.API\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "ECommerce.API\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.API\\Controllers\\UserController.cs",
+              "RelativeToolTip": "ECommerce.API\\Controllers\\UserController.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAIA2wD0AAABPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T08:50:14.952Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GetAllUserQueryHandler.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Users\\Queries\\GetAllUser\\GetAllUserQueryHandler.cs",
+              "RelativeDocumentMoniker": "ECommerce.Application\\Features\\Users\\Queries\\GetAllUser\\GetAllUserQueryHandler.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Users\\Queries\\GetAllUser\\GetAllUserQueryHandler.cs",
+              "RelativeToolTip": "ECommerce.Application\\Features\\Users\\Queries\\GetAllUser\\GetAllUserQueryHandler.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAewBoAAACMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T08:03:55.351Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "AddToCartCommandHandler.cs",
-              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Carts\\Commands\\AddToCart\\AddToCartCommandHandler.cs",
-              "RelativeDocumentMoniker": "ECommerce.Application\\Features\\Carts\\Commands\\AddToCart\\AddToCartCommandHandler.cs",
-              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Carts\\Commands\\AddToCart\\AddToCartCommandHandler.cs",
-              "RelativeToolTip": "ECommerce.Application\\Features\\Carts\\Commands\\AddToCart\\AddToCartCommandHandler.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAYwAAAAAAAAAAA",
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.API\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "ECommerce.API\\Controllers\\ProductController.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.API\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "ECommerce.API\\Controllers\\ProductController.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAAwBgAAABWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T07:32:37.432Z"
+              "WhenOpened": "2025-05-22T07:59:04.939Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
+              "Title": "GetAllProductsQuery.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Products\\Queries\\GetAllProducts\\GetAllProductsQuery.cs",
+              "RelativeDocumentMoniker": "ECommerce.Application\\Features\\Products\\Queries\\GetAllProducts\\GetAllProductsQuery.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Products\\Queries\\GetAllProducts\\GetAllProductsQuery.cs",
+              "RelativeToolTip": "ECommerce.Application\\Features\\Products\\Queries\\GetAllProducts\\GetAllProductsQuery.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAYAAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T07:58:21.104Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Interfaces\\Repositories\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "ECommerce.Application\\Interfaces\\Repositories\\IGenericRepository.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Interfaces\\Repositories\\IGenericRepository.cs",
+              "RelativeToolTip": "ECommerce.Application\\Interfaces\\Repositories\\IGenericRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAYAAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T07:57:08.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GetAllProductsQueryHandler.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Products\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
+              "RelativeDocumentMoniker": "ECommerce.Application\\Features\\Products\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Products\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
+              "RelativeToolTip": "ECommerce.Application\\Features\\Products\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAtwB0AAABOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T07:56:54.748Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.API\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "ECommerce.API\\Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.API\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "ECommerce.API\\Controllers\\CategoryController.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAQwBkAAABXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T07:31:32.127Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "OrderRepository.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Infrastructure\\Repositories\\OrderRepo\\OrderRepository.cs",
+              "RelativeDocumentMoniker": "ECommerce.Infrastructure\\Repositories\\OrderRepo\\OrderRepository.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Infrastructure\\Repositories\\OrderRepo\\OrderRepository.cs",
+              "RelativeToolTip": "ECommerce.Infrastructure\\Repositories\\OrderRepo\\OrderRepository.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAgwCQAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T07:21:31.811Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "GenericRepository.cs",
               "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Infrastructure\\Repositories\\GenericRepository.cs",
               "RelativeDocumentMoniker": "ECommerce.Infrastructure\\Repositories\\GenericRepository.cs",
               "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Infrastructure\\Repositories\\GenericRepository.cs",
               "RelativeToolTip": "ECommerce.Infrastructure\\Repositories\\GenericRepository.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwBUAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T07:31:21.712Z"
+              "WhenOpened": "2025-05-22T07:17:44.694Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IProductRepository.cs",
-              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Interfaces\\Repositories\\ProductRepository\\IProductRepository.cs",
-              "RelativeDocumentMoniker": "ECommerce.Application\\Interfaces\\Repositories\\ProductRepository\\IProductRepository.cs",
-              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Interfaces\\Repositories\\ProductRepository\\IProductRepository.cs",
-              "RelativeToolTip": "ECommerce.Application\\Interfaces\\Repositories\\ProductRepository\\IProductRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 4,
+              "Title": "GetOrdersQuery.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Orders\\Queries\\GetOrders\\GetOrdersQuery.cs",
+              "RelativeDocumentMoniker": "ECommerce.Application\\Features\\Orders\\Queries\\GetOrders\\GetOrdersQuery.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Orders\\Queries\\GetOrders\\GetOrdersQuery.cs",
+              "RelativeToolTip": "ECommerce.Application\\Features\\Orders\\Queries\\GetOrders\\GetOrdersQuery.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAcAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T07:31:04.163Z"
+              "WhenOpened": "2025-05-22T07:12:41.61Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ICartRepository.cs",
-              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Interfaces\\Repositories\\CartRepository\\ICartRepository.cs",
-              "RelativeDocumentMoniker": "ECommerce.Application\\Interfaces\\Repositories\\CartRepository\\ICartRepository.cs",
-              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Interfaces\\Repositories\\CartRepository\\ICartRepository.cs",
-              "RelativeToolTip": "ECommerce.Application\\Interfaces\\Repositories\\CartRepository\\ICartRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAABAAAA",
+              "DocumentIndex": 15,
+              "Title": "GetAllCategoryQuery.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Categories\\Queries\\GetAllCategory\\GetAllCategoryQuery.cs",
+              "RelativeDocumentMoniker": "ECommerce.Application\\Features\\Categories\\Queries\\GetAllCategory\\GetAllCategoryQuery.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Categories\\Queries\\GetAllCategory\\GetAllCategoryQuery.cs",
+              "RelativeToolTip": "ECommerce.Application\\Features\\Categories\\Queries\\GetAllCategory\\GetAllCategoryQuery.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAYAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T07:30:57.322Z"
+              "WhenOpened": "2025-05-22T07:12:30.947Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ClearCartCommandHandler.cs",
-              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Carts\\Commands\\ClearCart\\ClearCartCommandHandler.cs",
-              "RelativeDocumentMoniker": "ECommerce.Application\\Features\\Carts\\Commands\\ClearCart\\ClearCartCommandHandler.cs",
-              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Carts\\Commands\\ClearCart\\ClearCartCommandHandler.cs",
-              "RelativeToolTip": "ECommerce.Application\\Features\\Carts\\Commands\\ClearCart\\ClearCartCommandHandler.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAQwCUAAAAAAAAA",
+              "DocumentIndex": 11,
+              "Title": "GetAllCategoryQueryHandler.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Categories\\Queries\\GetAllCategory\\GetAllCategoryQueryHandler.cs",
+              "RelativeDocumentMoniker": "ECommerce.Application\\Features\\Categories\\Queries\\GetAllCategory\\GetAllCategoryQueryHandler.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Categories\\Queries\\GetAllCategory\\GetAllCategoryQueryHandler.cs",
+              "RelativeToolTip": "ECommerce.Application\\Features\\Categories\\Queries\\GetAllCategory\\GetAllCategoryQueryHandler.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAtwCQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T07:22:34.31Z"
+              "WhenOpened": "2025-05-22T07:12:28.298Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CartController.cs",
-              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.API\\Controllers\\CartController.cs",
-              "RelativeDocumentMoniker": "ECommerce.API\\Controllers\\CartController.cs",
-              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.API\\Controllers\\CartController.cs",
-              "RelativeToolTip": "ECommerce.API\\Controllers\\CartController.cs",
-              "ViewState": "AQIAACgAAAAAAAAAAAAgwD0AAAAJAAAA",
+              "DocumentIndex": 14,
+              "Title": "GetOrdersQueryHandler.cs",
+              "DocumentMoniker": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Orders\\Queries\\GetOrders\\GetOrdersQueryHandler.cs",
+              "RelativeDocumentMoniker": "ECommerce.Application\\Features\\Orders\\Queries\\GetOrders\\GetOrdersQueryHandler.cs",
+              "ToolTip": "D:\\ASP.NET Core Web API\\up_github\\ProjectWebAPI_Ecommerce\\ECommerce.Application\\Features\\Orders\\Queries\\GetOrders\\GetOrdersQueryHandler.cs",
+              "RelativeToolTip": "ECommerce.Application\\Features\\Orders\\Queries\\GetOrders\\GetOrdersQueryHandler.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAQwBsAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T06:30:17.033Z"
+              "WhenOpened": "2025-05-22T07:11:59.434Z"
             }
           ]
         }

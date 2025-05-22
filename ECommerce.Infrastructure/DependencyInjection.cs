@@ -1,16 +1,19 @@
 ﻿using ECommerce.Application.Interfaces.Authentication;
 using ECommerce.Application.Interfaces.BackgroundJobs;
+using ECommerce.Application.Interfaces.QueryFilters;
 using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Services;
 using ECommerce.Infrastructure.Authentication;
 using ECommerce.Infrastructure.BackgroundJobs.OrderBackgroundService;
 using ECommerce.Infrastructure.Data;
+using ECommerce.Infrastructure.QueryFilters;
 using ECommerce.Infrastructure.Repositories;
 using ECommerce.Infrastructure.Services.EmailService;
 using ECommerce.Infrastructure.Services.HangfireBackgroundJobService;
 using ECommerce.Infrastructure.Services.StripeService;
 using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -65,9 +68,12 @@ namespace ECommerce.Infrastructure
             services.AddScoped<IStripeService, StripeService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IDateFilterService, DateFilterServices>();
             services.AddScoped<IBackgroundService, HangfireBackgroundJobService>();
             services.AddScoped<IOrderBackgroundService, OrderBackgroundService>();
             services.Configure<EmailSettings>(configuration.GetSection("SmtpSettings"));
+
+            services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
             // config Hangfire
             services.AddHangfire(x =>

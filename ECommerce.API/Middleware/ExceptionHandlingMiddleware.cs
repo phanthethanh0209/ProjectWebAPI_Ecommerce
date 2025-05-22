@@ -65,6 +65,13 @@ namespace ECommerce.API.Middleware
                     notFoundException.Message,
                     null),
 
+                ForbiddenAccessException forbiddenException => new ExceptionDetails(
+                    StatusCodes.Status403Forbidden,
+                     "Forbidden",
+                    "Access denied ",
+                    forbiddenException.Message,
+                    null),
+
                 //_ => new ExceptionDetails(
                 //    StatusCodes.Status500InternalServerError,
                 //    "ServerError",

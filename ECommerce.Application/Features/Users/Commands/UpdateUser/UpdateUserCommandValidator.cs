@@ -17,8 +17,8 @@ namespace ECommerce.Application.Features.Users.Commands.UpdateUser
 
             RuleFor(e => e.Email)
                 .NotEmpty().WithMessage("Email is required")
-                .EmailAddress().WithMessage("Invalid email format.")
-                .MustAsync(BeUniqueEmail).WithMessage("Email already exists.");
+                .EmailAddress().WithMessage("Invalid email format.");
+            //.MustAsync(BeUniqueEmail).WithMessage("Email already exists.");
 
             RuleFor(e => e.Phone)
                 .NotEmpty().WithMessage("Phone is required")

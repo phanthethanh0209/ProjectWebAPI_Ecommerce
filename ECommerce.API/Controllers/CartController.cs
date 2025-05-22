@@ -13,6 +13,7 @@ namespace ECommerce.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CartController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -22,7 +23,6 @@ namespace ECommerce.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize]
         [HttpPost("AddToCart")]
         public async Task<IActionResult> AddToCart([FromBody] AddToCartCommand command)
         {
@@ -31,7 +31,6 @@ namespace ECommerce.API.Controllers
                 CreatedAtAction(nameof(GetCartByUserId), result.Data) : BadRequest(result.ErrorMessage);
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetCartByUserId()
         {
@@ -39,7 +38,6 @@ namespace ECommerce.API.Controllers
             return result.IsSuccess ? Ok(result.Data) : BadRequest(result.ErrorMessage);
         }
 
-        [Authorize]
         [HttpPut]
         public async Task<IActionResult> UpdateCart([FromBody] UpdateCartCommand command)
         {

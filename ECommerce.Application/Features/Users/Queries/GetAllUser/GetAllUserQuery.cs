@@ -4,6 +4,6 @@ using MediatR;
 
 namespace ECommerce.Application.Features.Users.Queries.GetAllUser
 {
-    public record class GetAllUserQuery(int pageNummber, int limit, string? filter = null)
-        : IRequest<ResultResponse<IEnumerable<GetUserResponse>>>;
+    public record class GetAllUserQuery(int pageNumber, int pageSize, string? filter = null)
+        : IRequest<ResultResponse<PagedList<GetUserResponse>>>;
 }

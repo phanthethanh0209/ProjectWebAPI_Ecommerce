@@ -17,10 +17,10 @@ namespace ECommerce.Application.Features.Categories.Commands.DeleteCategory
 
         public async Task<ResultResponse<Unit>> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
-            Category category = await _unitOfWork.Category.GetFirstOrDefaultAsync(t => t.Id == request.Id);
+            Category category = await _unitOfWork.Category.GetFirstOrDefaultAsync(t => t.Id == request.id);
             if (category == null)
             {
-                throw new NotFoundException("Category", request.Id);
+                throw new NotFoundException("Category", request.id);
             }
             await _unitOfWork.Category.Delete(category);
             await _unitOfWork.SaveChangesAsync();

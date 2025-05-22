@@ -2,6 +2,8 @@
 using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Services;
 using ECommerce.Domain.Entities;
+using ECommerce.Domain.Enums;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Stripe;
 using System.Globalization;
@@ -16,18 +18,19 @@ namespace ECommerce.Infrastructure.BackgroundJobs.OrderBackgroundService
 
 
         public OrderBackgroundService(IUnitOfWork unitOfWork, ILogger<OrderBackgroundService> logger,
-            IEmailService emailService)
+            IEmailService emailService, IConfiguration config)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
             _emailService = emailService;
+            StripeConfiguration.ApiKey = config["StripeSettings:SecretKey"];
         }
 
         public async Task SendOrderConfirmationEmail(Guid orderId)
         {
             _logger.LogInformation("Current Dir: {Dir}", Path.Combine(Directory.GetCurrentDirectory(), "Templates", "Email"));
 
-            Order order = await _unitOfWork.Order.GetFirstOrDefaultAsync(t => t.Id == orderId, items => items.OrderItems);
+            Order order = await _unitOfWork.Orders.GetFirstOrDefaultAsync(t => t.Id == orderId, items => items.OrderItems);
             if (order == null)
                 throw new Exception("Order not found");
 
@@ -65,27 +68,27 @@ namespace ECommerce.Infrastructure.BackgroundJobs.OrderBackgroundService
             await _unitOfWork.BeginTransactionAsync();
             try
             {
-                Order order = await _unitOfWork.Order.GetFirstOrDefaultAsync(t => t.Id == orderId);
-                if (order == null || order.Status != "Pending")
+                Order order = await _unitOfWork.Orders.GetFirstOrDefaultAsync(t => t.Id == orderId);
+                if (order == null || order.Status != OrderStatus.Pending)
                 {
                     // log
                     return;
                 }
 
                 Payment payment = await _unitOfWork.Payment.GetFirstOrDefaultAsync(t => t.OrderId == orderId);
-                if (payment == null || payment.PaymentStatus != "Pending")
+                if (payment == null || payment.PaymentStatus != PaymentStatus.Pending)
                 {
                     // log
                     return;
                 }
 
                 // update status Order and Payment
-                order.Status = "Cancelled";
+                order.Status = OrderStatus.Cancelled;
                 order.UpdateAt = DateTime.UtcNow;
 
-                payment.PaymentStatus = "Cancelled";
+                payment.PaymentStatus = PaymentStatus.Cancelled;
 
-                await _unitOfWork.Order.Update(order);
+                await _unitOfWork.Orders.Update(order);
                 await _unitOfWork.Payment.Update(payment);
 
                 // update Stripe

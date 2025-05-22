@@ -1,4 +1,7 @@
 ﻿using ECommerce.Application.Interfaces.Repositories.CartRepository;
+using ECommerce.Application.Interfaces.Repositories.OrderRepository;
+using ECommerce.Application.Interfaces.Repositories.PermissionRepository;
+using ECommerce.Application.Interfaces.Repositories.RoleRepository;
 using ECommerce.Domain.Entities;
 
 namespace ECommerce.Application.Interfaces.Repositories
@@ -13,9 +16,13 @@ namespace ECommerce.Application.Interfaces.Repositories
         IGenericRepository<Product> Product { get; }
         //IProductRepository<Product> Product { get; }
         IGenericRepository<CartItem> CartItem { get; }
-        IGenericRepository<Order> Order { get; }
+        IOrderRepository Orders { get; }
         IGenericRepository<OrderItem> OrderItem { get; }
         IGenericRepository<Payment> Payment { get; }
+        IRoleRepository Roles { get; }
+        IPermissionRepository Permissions { get; }
+        IGenericRepository<UserRole> UserRole { get; }
+        IGenericRepository<RolePermission> RolePermission { get; }
 
         Task BeginTransactionAsync();
         Task CommitTransactionAsync();

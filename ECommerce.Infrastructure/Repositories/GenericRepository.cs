@@ -32,7 +32,7 @@ namespace ECommerce.Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter, int pageNumber, int limit)
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter)
         {
             IQueryable<T> query = _dbSet;
             if (filter != null)
@@ -40,7 +40,7 @@ namespace ECommerce.Infrastructure.Repositories
                 query = query.Where(filter);
             }
 
-            query = query.Skip((pageNumber - 1) * limit).Take(limit);
+            //query = query.Skip((pageNumber - 1) * limit).Take(limit);
             return await query.ToListAsync();
         }
 

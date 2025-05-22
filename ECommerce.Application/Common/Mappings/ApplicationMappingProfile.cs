@@ -2,6 +2,9 @@
 using ECommerce.Application.Features.Carts.Commands.AddToCart;
 using ECommerce.Application.Features.Carts.Commands.UpdateCart;
 using ECommerce.Application.Features.Carts.DTOs;
+using ECommerce.Application.Features.Categories.Commands.CreateCategory;
+using ECommerce.Application.Features.Categories.Commands.UpdateCategory;
+using ECommerce.Application.Features.Categories.DTOs;
 using ECommerce.Application.Features.Orders.Commands.CreateOrder;
 using ECommerce.Application.Features.Orders.DTOs;
 using ECommerce.Application.Features.Products.Commands.CreateProduct;
@@ -24,6 +27,11 @@ namespace ECommerce.Application.Common.Mappings
             CreateMap<UpdateProductCommand, Product>();
             //CreateMap<DeleteProductCommand, Product>();
 
+            // Mapping category
+            CreateMap<Category, GetCategoryResponse>();
+            CreateMap<CreateCategoryCommand, Category>();
+            CreateMap<UpdateCategoryCommand, Category>();
+
             // Mapping User
             CreateMap<RegisterCommand, User>();
             CreateMap<UpdateUserCommand, User>();
@@ -33,9 +41,11 @@ namespace ECommerce.Application.Common.Mappings
             CreateMap<CreateOrderCommand, Order>()
                 .ForMember(dest => dest.OrderItems, opt => opt.Ignore())
                 .ForMember(t => t.UpdateAt, opt => opt.Ignore());
+            CreateMap<Order, OrderDTO>();
 
             // Mapping OrderItem
             CreateMap<OrderItemDTO, OrderItem>();
+            CreateMap<OrderItem, OrderItems>();
 
             // Mapping Payment
             CreateMap<PaymentDTO, Payment>();

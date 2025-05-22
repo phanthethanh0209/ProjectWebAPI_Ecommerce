@@ -22,12 +22,21 @@ namespace ECommerce.Infrastructure.Authentication
             _unitOfWork = unitOfWork;
         }
 
-        public string GenerateAccessToken(User user)
+        public async Task<string> GenerateAccessToken(User user)
         {
-            Claim[] claims = new Claim[] {
+            // Create claims
+            List<Claim> claims = new()
+            {
                 new(JwtRegisteredClaimNames.Sub,  user.Id.ToString()),
                 new(JwtRegisteredClaimNames.Email,  user.Email),
             };
+
+            // get role from db and add role in claims
+            List<string> roles = await _unitOfWork.Roles.GetRoleUserAsync(user);
+            foreach (string role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_jwtOptions.SecretKey));
             SigningCredentials sigingCredentials = new(key, SecurityAlgorithms.HmacSha256);
@@ -54,7 +63,7 @@ namespace ECommerce.Infrastructure.Authentication
 
         public async Task<LoginResponse> GenerateToken(User user)
         {
-            string accessToken = GenerateAccessToken(user);
+            string accessToken = await GenerateAccessToken(user);
             string refreshToken = await GenerateAndSaveRefreshTokenAsync(user);
 
             return new LoginResponse(accessToken, refreshToken);

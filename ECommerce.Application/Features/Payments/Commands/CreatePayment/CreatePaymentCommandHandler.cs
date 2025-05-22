@@ -3,6 +3,7 @@ using ECommerce.Application.Features.Payments.DTOs;
 using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Services;
 using ECommerce.Domain.Entities;
+using ECommerce.Domain.Enums;
 using MediatR;
 
 namespace ECommerce.Application.Features.Payments.Commands.CreatePayment
@@ -23,11 +24,11 @@ namespace ECommerce.Application.Features.Payments.Commands.CreatePayment
         public async Task<StripePaymentIntentResult> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
         {
             // check exists order
-            Order order = await _unitOfWork.Order.GetFirstOrDefaultAsync(t => t.Id == request.OrderId);
+            Order order = await _unitOfWork.Orders.GetFirstOrDefaultAsync(t => t.Id == request.OrderId);
             if (order == null)
                 throw new Exception("Order not found");
 
-            if (order.Status != "Pending")
+            if (order.Status != OrderStatus.Pending)
                 throw new Exception("Order is not in a valid state for payment");
 
             // create paymentIntent in Stripe
@@ -38,7 +39,7 @@ namespace ECommerce.Application.Features.Payments.Commands.CreatePayment
             Payment payment = new()
             {
                 OrderId = order.Id,
-                PaymentStatus = "Pending",
+                PaymentStatus = PaymentStatus.Pending,
                 PaymentMethod = request.PaymentMethod,
                 StripePaymentIntentId = paymentIntent.PaymentIntentId,
             };

@@ -13,5 +13,6 @@
         public Cart Cart { get; set; } // 1 - 1 Cart
         public ICollection<RefreshToken> RefreshTokens { get; set; }
         public ICollection<Order> Orders { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
     }
 }

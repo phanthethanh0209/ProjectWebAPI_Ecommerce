@@ -3,13 +3,5 @@ using MediatR;
 
 namespace ECommerce.Application.Features.Categories.Commands.DeleteCategory
 {
-    public class DeleteCategoryCommand : IRequest<ResultResponse<Unit>>
-    {
-        public Guid Id { get; set; }
-
-        public DeleteCategoryCommand(Guid id)
-        {
-            Id = id;
-        }
-    }
+    public record class DeleteCategoryCommand(Guid id) : IRequest<ResultResponse<Unit>>;
 }

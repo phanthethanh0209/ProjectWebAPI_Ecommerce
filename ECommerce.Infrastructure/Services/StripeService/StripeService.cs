@@ -3,6 +3,7 @@ using ECommerce.Application.Interfaces.BackgroundJobs;
 using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Services;
 using ECommerce.Domain.Entities;
+using ECommerce.Domain.Enums;
 using Hangfire;
 using Microsoft.Extensions.Configuration;
 using Stripe;
@@ -54,7 +55,7 @@ namespace ECommerce.Infrastructure.Services.StripeService
             Payment payment = await _unitOfWork.Payment.GetFirstOrDefaultAsync(t => t.StripePaymentIntentId.Equals(paymentIntent.Id));
             if (payment == null) return;
 
-            Order order = await _unitOfWork.Order.GetFirstOrDefaultAsync(t => t.Id.Equals(payment.OrderId), items => items.OrderItems);
+            Order order = await _unitOfWork.Orders.GetFirstOrDefaultAsync(t => t.Id.Equals(payment.OrderId), items => items.OrderItems);
 
             if (stripeEvent.Type == "payment_intent.succeeded")
             {
@@ -62,12 +63,12 @@ namespace ECommerce.Infrastructure.Services.StripeService
                 await _unitOfWork.BeginTransactionAsync();
                 try
                 {
-                    payment.PaymentStatus = "Completed";
+                    payment.PaymentStatus = PaymentStatus.Completed;
                     await _unitOfWork.Payment.Update(payment);
 
-                    order.Status = "Processing";
+                    order.Status = OrderStatus.Paid;
                     order.UpdateAt = DateTime.UtcNow;
-                    await _unitOfWork.Order.Update(order);
+                    await _unitOfWork.Orders.Update(order);
 
                     // update quantity product
                     foreach (OrderItem item in order.OrderItems)
@@ -80,8 +81,11 @@ namespace ECommerce.Infrastructure.Services.StripeService
                         await _unitOfWork.Product.Update(product);
                     }
 
-                    // delete product in cart
-
+                    // remove item in cart and update total cart
+                    Cart cart = await _unitOfWork.Carts.GetFirstOrDefaultAsync(t => t.UserId == order.UserId);
+                    await _unitOfWork.Carts.RemoveCartItemsAsync(cart.Id, order.OrderItems.Select(t => t.ProductId).ToList());
+                    cart.TotalAmount -= order.TotalAmount;
+                    await _unitOfWork.Carts.Update(cart);
 
                     // send email with mailkit use backgroundjob (fire and forget)
                     _backgroundJobClient.Enqueue<IOrderBackgroundService>(x => x.SendOrderConfirmationEmail(order.Id));
@@ -99,12 +103,12 @@ namespace ECommerce.Infrastructure.Services.StripeService
                 await _unitOfWork.BeginTransactionAsync();
                 try
                 {
-                    payment.PaymentStatus = "Failed";
+                    payment.PaymentStatus = PaymentStatus.Failed;
                     await _unitOfWork.Payment.Update(payment);
 
-                    order.Status = "PaymentFailed";
+                    order.Status = OrderStatus.Failed;
                     order.UpdateAt = DateTime.UtcNow;
-                    await _unitOfWork.Order.Update(order);
+                    await _unitOfWork.Orders.Update(order);
 
                     await _unitOfWork.CommitTransactionAsync();
                 }

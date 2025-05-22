@@ -5,6 +5,7 @@ using ECommerce.Application.Features.Users.Commands.UpdateUser;
 using ECommerce.Application.Features.Users.DTOs;
 using ECommerce.Application.Features.Users.Queries.GetAllUser;
 using ECommerce.Application.Features.Users.Queries.GetUserById;
+using ECommerce.Infrastructure.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace ECommerce.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -22,6 +24,7 @@ namespace ECommerce.API.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterCommand command)
         {
@@ -29,7 +32,7 @@ namespace ECommerce.API.Controllers
             return result.IsSuccess ? CreatedAtAction(nameof(GetUserById), new { id = result.Data }, result.Data) : BadRequest(result.ErrorMessage);
         }
 
-        [Authorize]
+        //[HasPermission(new[] { "Update.User" })]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser([FromRoute] Guid id, [FromBody] UpdateUserCommand command)
         {
@@ -39,7 +42,7 @@ namespace ECommerce.API.Controllers
             return result.IsSuccess ? Ok(result.Data) : NotFound(result.ErrorMessage);
         }
 
-        [Authorize]
+        [HasPermission(new[] { "Delete.User" })]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] Guid id)
         {
@@ -47,7 +50,6 @@ namespace ECommerce.API.Controllers
             return result.IsSuccess ? NoContent() : NotFound(result.ErrorMessage);
         }
 
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById([FromRoute] Guid id)
         {
@@ -55,11 +57,11 @@ namespace ECommerce.API.Controllers
             return result.IsSuccess ? Ok(result.Data) : NotFound(result.ErrorMessage);
         }
 
-        [Authorize]
+        [HasPermission(new[] { "View.User" })]
         [HttpGet]
-        public async Task<IActionResult> GetAllUser([FromQuery] int pageNumber = 1, [FromQuery] int limit = 5)
+        public async Task<IActionResult> GetAllUser([FromQuery] GetAllUserQuery query)
         {
-            ResultResponse<IEnumerable<GetUserResponse>> result = await _mediator.Send(new GetAllUserQuery(pageNumber, limit));
+            ResultResponse<PagedList<GetUserResponse>> result = await _mediator.Send(query);
             return result.IsSuccess ? Ok(result.Data) : NotFound(result.ErrorMessage);
         }
     }

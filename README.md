@@ -70,7 +70,7 @@ Tất cả được ánh xạ tự động và kiểm tra bằng Attribute `HasP
 
 Dự án sử dụng Hangfire để xử lý các tác vụ nền, bao gồm:
 - Gửi email xác nhận đơn hàng sau khi thanh toán thành công
-- Hủy đơn hàng nếu chưa thanh toán sau 15 phút
+- Hủy đơn hàng nếu chưa thanh toán sau 15 phút  
 Có thể truy cập dashboard tại `/hangfire` để theo dõi job
 
 ## 🔄 Cổng thanh toán Stripe

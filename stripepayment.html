@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        /* CSS cho form đẹp tí */
+        
+        .StripeElement {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+        
+        #card-errors {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Thanh toán bằng thẻ</h3>
+
+    <form id="payment-form">
+        <div id="card-element"></div>
+        <div id="card-errors" role="alert"></div>
+        <button type="submit" id="submit">Thanh toán</button>
+    </form>
+
+    <script>
+        const stripe = Stripe('pk_test_51RHgo9RxucepjmqLED77lIomqUelJd0VadHoOBHgDnRd3iaxijLG77coHajgEMlcTmFMPGDPs8EwvckuhYUogkhJ00LIIj1QFl'); // ← Publishable Key ở Dashboard
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
+        cardElement.mount('#card-element'); // Hiển thị ô nhập thẻ
+
+        const form = document.getElementById('payment-form');
+
+        form.addEventListener('submit', async(event) => {
+            event.preventDefault();
+
+            const clientSecret = 'pi_3RR9DTRxucepjmqL1RH10xtW_secret_oOo4HSzjqMIagkXQNVlP7c1y7'; // ← clientSecret lấy từ backend trả về
+
+            const {
+                error,
+                paymentIntent
+            } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: cardElement,
+                }
+            });
+
+            if (error) {
+                document.getElementById('card-errors').textContent = error.message;
+                console.error(error);
+            } else if (paymentIntent.status === 'succeeded') {
+                alert('Thanh toán thành công!');
+                console.log('PaymentIntent:', paymentIntent);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

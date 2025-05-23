@@ -86,7 +86,8 @@ Cách gọi và sử dụng thanh toán Stripe và webhook Stripe:
 Các bước sử dụng Stripe CLI
 - Tải file stripe mới nhất từ link: https://github.com/stripe/stripe-cli/releases/tag/v1.26.1
 - Cài đặt biến môi trường cho Stripe
-- chạy stripe listen
+- Chạy stripe listen
+
   ```bash
   stripe listen --forward-to https://localhost:xxxxx/api/stripe/webhook
   ```

@@ -1,0 +1,102 @@
+﻿
+@model ECommerce.Infrastructure.BackgroundJobs.CouponBackgroundService.CouponEmailDTO
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Promotion Alert!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+        }
+        .header {
+            background-color: #007bff;
+            text-align: center;
+            padding: 20px;
+        }
+        .header img {
+            max-width: 150px;
+        }
+        .content {
+            padding: 20px;
+            color: #333333;
+        }
+        .content h2 {
+            color: #007bff;
+            font-size: 24px;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .promotion-details {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .cta-button {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .cta-button a {
+            background-color: #28a745;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #777777;
+            background-color: #f4f4f4;
+        }
+
+    </style>
+</head>
+<body>
+    <table class="container" cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="header">
+                <img src="your-logo.png" alt="Your Store Logo" style="display: block;">
+            </td>
+        </tr>
+        <tr>
+            <td class="content">
+                <h2>Dear @Model.UserName,</h2>
+                <p>We’re thrilled to announce a new promotion just for you!</p>
+                <div class="promotion-details">
+                    <p><strong>Name:</strong> @Model.Name</p>
+                    <p><strong>Discount:</strong> @Model.DiscountValue @Model.DiscountType </p>
+                    <p><strong>Valid From:</strong> @Model.StartDate to @Model.EndDate </p>
+                </div>
+                <p>Explore our store to find amazing deals and save big during this limited-time offer!</p>
+                <div class="cta-button">
+                    <a href="@Model.ShopLink ">Discover Deals Now</a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="footer">
+                <p>© 2025 Thanh Ecommerce. All rights reserved.</p>
+                <p>Contact us: <a href="mailto:support@ecommerce.com">support@ecommerce.com</a></p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

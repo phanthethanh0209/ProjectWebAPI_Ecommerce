@@ -5,6 +5,8 @@ using ECommerce.Application.Features.Carts.DTOs;
 using ECommerce.Application.Features.Categories.Commands.CreateCategory;
 using ECommerce.Application.Features.Categories.Commands.UpdateCategory;
 using ECommerce.Application.Features.Categories.DTOs;
+using ECommerce.Application.Features.Coupons.Commands.CreateCoupon;
+using ECommerce.Application.Features.Coupons.DTOs;
 using ECommerce.Application.Features.Orders.Commands.CreateOrder;
 using ECommerce.Application.Features.Orders.DTOs;
 using ECommerce.Application.Features.Products.Commands.CreateProduct;
@@ -56,6 +58,16 @@ namespace ECommerce.Application.Common.Mappings
             CreateMap<CartItem, CartItemDTO>();
             CreateMap<UpdateCartCommand, CartItem>();
 
+            // Mapping Coupon
+            CreateMap<CreateCouponCommand, Coupon>()
+                .ForMember(t => t.UpdatedAt, opt => opt.Ignore());
+
+            // Mapping Product Coupon
+            CreateMap<Coupon, CouponResponse>()
+                .ForMember(dest => dest.Products, opt =>
+                opt.MapFrom(src => src.Product_Coupons.Select(cp => cp.Product)));
+            CreateMap<Product_Coupons, ProductDTO>();
+            CreateMap<Product, ProductDTO>();
         }
     }
 }

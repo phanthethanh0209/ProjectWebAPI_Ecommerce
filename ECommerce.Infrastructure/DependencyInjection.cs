@@ -4,6 +4,7 @@ using ECommerce.Application.Interfaces.QueryFilters;
 using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Services;
 using ECommerce.Infrastructure.Authentication;
+using ECommerce.Infrastructure.BackgroundJobs.CouponBackgroundService;
 using ECommerce.Infrastructure.BackgroundJobs.OrderBackgroundService;
 using ECommerce.Infrastructure.Data;
 using ECommerce.Infrastructure.QueryFilters;
@@ -71,6 +72,7 @@ namespace ECommerce.Infrastructure
             services.AddScoped<IDateFilterService, DateFilterServices>();
             services.AddScoped<IBackgroundService, HangfireBackgroundJobService>();
             services.AddScoped<IOrderBackgroundService, OrderBackgroundService>();
+            services.AddScoped<ICouponBackgroundService, CouponBackgroundService>();
             services.Configure<EmailSettings>(configuration.GetSection("SmtpSettings"));
 
             services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();

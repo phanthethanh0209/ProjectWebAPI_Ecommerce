@@ -56,5 +56,11 @@ namespace ECommerce.Infrastructure.Services.EmailService
         {
             return await _razorEngine.CompileRenderAsync(templateName, model);
         }
+
+        public async Task SendEmailBatchAsync(IEnumerable<string> emails, string subject, string body)
+        {
+            IEnumerable<Task> emailTasks = emails.Select(email => SendEmailAsync(email, subject, body));
+            await Task.WhenAll(emailTasks);
+        }
     }
 }

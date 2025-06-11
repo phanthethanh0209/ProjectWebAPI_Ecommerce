@@ -14,5 +14,6 @@
 
         public ICollection<CartItem> CartItems { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<Product_Coupons> Product_Coupons { get; set; }
     }
 }

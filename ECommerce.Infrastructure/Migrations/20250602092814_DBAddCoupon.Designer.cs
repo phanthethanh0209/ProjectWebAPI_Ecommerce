@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250520064521_dbUpdateAuthorization")]
-    partial class dbUpdateAuthorization
+    [Migration("20250602092814_DBAddCoupon")]
+    partial class DBAddCoupon
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,15 @@ namespace ECommerce.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Cart", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("560a88f4-f3e5-40e6-8076-5cd6780dc14a"),
+                            CreatedAt = new DateTime(2024, 3, 22, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalAmount = 0m,
+                            UserId = new Guid("d1407a13-ad60-48ad-8346-8fba9cbb4f41")
+                        });
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.CartItem", b =>
@@ -123,6 +132,42 @@ namespace ECommerce.Infrastructure.Migrations
                             Description = "Các loại tivi, màn hình",
                             Name = "TV & Màn hình"
                         });
+                });
+
+            modelBuilder.Entity("ECommerce.Domain.Entities.Coupon", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CouponType")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("CouponValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Coupon", (string)null);
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.Order", b =>
@@ -230,27 +275,147 @@ namespace ECommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b867733f-fbbb-410b-b7f6-0c667d40a229"),
-                            Description = "View data",
-                            Name = "Read"
+                            Id = new Guid("d57fc2b6-0dc6-4a88-bbaf-bb876aa14310"),
+                            Description = "View user information",
+                            Name = "View.User"
                         },
                         new
                         {
-                            Id = new Guid("3ef0841e-bd88-4e27-8642-603c805462f9"),
-                            Description = "Add new data",
-                            Name = "Create"
+                            Id = new Guid("6610746a-389f-472e-b4eb-5eef6295b361"),
+                            Description = "Update user information",
+                            Name = "Update.User"
                         },
                         new
                         {
-                            Id = new Guid("34ae215d-c182-4c9f-b745-b8986d36dc36"),
-                            Description = "Modify data",
-                            Name = "Update"
+                            Id = new Guid("ccaaebbd-4740-4516-b860-f6440fd4c55f"),
+                            Description = "Delete user",
+                            Name = "Delete.User"
                         },
                         new
                         {
-                            Id = new Guid("95747c1e-fc1f-48ec-b108-34af7da5bce2"),
-                            Description = "Remove data",
-                            Name = "Delete"
+                            Id = new Guid("238ec90a-8408-4fbe-a991-eb8f2eb4a28c"),
+                            Description = "View cart",
+                            Name = "View.Cart"
+                        },
+                        new
+                        {
+                            Id = new Guid("b248903f-6891-4ebb-8b33-55a3dfa879df"),
+                            Description = "Update cart",
+                            Name = "Update.Cart"
+                        },
+                        new
+                        {
+                            Id = new Guid("8c711aad-83b0-4e9e-af6d-b406ca1b150d"),
+                            Description = "Delete cart",
+                            Name = "Delete.Cart"
+                        },
+                        new
+                        {
+                            Id = new Guid("22a895e7-40ac-4168-bc64-def6c6e945a6"),
+                            Description = "View order",
+                            Name = "View.Order"
+                        },
+                        new
+                        {
+                            Id = new Guid("b764954a-903a-4ec2-ac11-988e2f9f22ae"),
+                            Description = "Create order",
+                            Name = "Create.Order"
+                        },
+                        new
+                        {
+                            Id = new Guid("02cd1655-929b-437b-98e5-8a6551eae34d"),
+                            Description = "Update order",
+                            Name = "Update.Order"
+                        },
+                        new
+                        {
+                            Id = new Guid("c5c65040-fd76-440f-bec0-51f86f19e431"),
+                            Description = "Delete order",
+                            Name = "Delete.Order"
+                        },
+                        new
+                        {
+                            Id = new Guid("b84f9ad1-b64f-40b7-8fb2-f71c44ef0106"),
+                            Description = "Approve order",
+                            Name = "Approve.Order"
+                        },
+                        new
+                        {
+                            Id = new Guid("b898cc6c-762e-40d4-9a9c-0cd1a3eb7b8e"),
+                            Description = "View order item",
+                            Name = "View.OrderItem"
+                        },
+                        new
+                        {
+                            Id = new Guid("b4c24c83-5628-4a9f-834b-10b07147481d"),
+                            Description = "Update order item",
+                            Name = "Update.OrderItem"
+                        },
+                        new
+                        {
+                            Id = new Guid("e95657da-49a6-49fc-8d6f-384a2dc45cce"),
+                            Description = "View product",
+                            Name = "View.Product"
+                        },
+                        new
+                        {
+                            Id = new Guid("7b61a427-65a7-459f-a0ed-41154bfaadf5"),
+                            Description = "Create product",
+                            Name = "Create.Product"
+                        },
+                        new
+                        {
+                            Id = new Guid("a3ac9aaa-f16a-4100-b07b-e0d4897193db"),
+                            Description = "Update product",
+                            Name = "Update.Product"
+                        },
+                        new
+                        {
+                            Id = new Guid("61d6359f-ce94-4d20-b2d7-66d03ff92891"),
+                            Description = "Delete product",
+                            Name = "Delete.Product"
+                        },
+                        new
+                        {
+                            Id = new Guid("86685765-75fd-4f6d-9f05-46c65ada32d8"),
+                            Description = "View category",
+                            Name = "View.Category"
+                        },
+                        new
+                        {
+                            Id = new Guid("e1532412-29c1-4e1c-afbf-0f5c5c4e41df"),
+                            Description = "Create category",
+                            Name = "Create.Category"
+                        },
+                        new
+                        {
+                            Id = new Guid("00cff030-2921-4267-b802-86dc6d88174a"),
+                            Description = "Update category",
+                            Name = "Update.Category"
+                        },
+                        new
+                        {
+                            Id = new Guid("3759092e-5e7b-4ca2-8c83-33104f549a0a"),
+                            Description = "Delete category",
+                            Name = "Delete.Category"
+                        },
+                        new
+                        {
+                            Id = new Guid("fa8fed50-24a7-4871-84d7-20b2376e8e27"),
+                            Description = "View payment",
+                            Name = "View.Payment"
+                        },
+                        new
+                        {
+                            Id = new Guid("aeb40204-4004-4884-b510-e46742046698"),
+                            Description = "Create payment",
+                            Name = "Create.Payment"
+                        },
+                        new
+                        {
+                            Id = new Guid("fcadd358-388c-4d20-a5af-86a235cf4352"),
+                            Description = "Update payment",
+                            Name = "Update.Payment"
                         });
                 });
 
@@ -327,6 +492,19 @@ namespace ECommerce.Infrastructure.Migrations
                             Price = 45990000m,
                             StockQuantity = 25
                         });
+                });
+
+            modelBuilder.Entity("ECommerce.Domain.Entities.Product_Coupons", b =>
+                {
+                    b.Property<Guid>("CouponId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CouponId", "ProductId");
+
+                    b.ToTable("Product_Coupons", (string)null);
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.RefreshToken", b =>
@@ -406,6 +584,168 @@ namespace ECommerce.Infrastructure.Migrations
                     b.HasIndex("PermissionId");
 
                     b.ToTable("RolePermission", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("d57fc2b6-0dc6-4a88-bbaf-bb876aa14310")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("6610746a-389f-472e-b4eb-5eef6295b361")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("ccaaebbd-4740-4516-b860-f6440fd4c55f")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("238ec90a-8408-4fbe-a991-eb8f2eb4a28c")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("b248903f-6891-4ebb-8b33-55a3dfa879df")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("8c711aad-83b0-4e9e-af6d-b406ca1b150d")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("22a895e7-40ac-4168-bc64-def6c6e945a6")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("b764954a-903a-4ec2-ac11-988e2f9f22ae")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("02cd1655-929b-437b-98e5-8a6551eae34d")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("c5c65040-fd76-440f-bec0-51f86f19e431")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("b84f9ad1-b64f-40b7-8fb2-f71c44ef0106")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("b898cc6c-762e-40d4-9a9c-0cd1a3eb7b8e")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("b4c24c83-5628-4a9f-834b-10b07147481d")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("e95657da-49a6-49fc-8d6f-384a2dc45cce")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("7b61a427-65a7-459f-a0ed-41154bfaadf5")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("a3ac9aaa-f16a-4100-b07b-e0d4897193db")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("61d6359f-ce94-4d20-b2d7-66d03ff92891")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("86685765-75fd-4f6d-9f05-46c65ada32d8")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("e1532412-29c1-4e1c-afbf-0f5c5c4e41df")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("00cff030-2921-4267-b802-86dc6d88174a")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("3759092e-5e7b-4ca2-8c83-33104f549a0a")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("fa8fed50-24a7-4871-84d7-20b2376e8e27")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("aeb40204-4004-4884-b510-e46742046698")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("fcadd358-388c-4d20-a5af-86a235cf4352")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("a6f25e26-400e-4e55-97b3-94ac35fd32ee"),
+                            PermissionId = new Guid("22a895e7-40ac-4168-bc64-def6c6e945a6")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("a6f25e26-400e-4e55-97b3-94ac35fd32ee"),
+                            PermissionId = new Guid("b764954a-903a-4ec2-ac11-988e2f9f22ae")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("a6f25e26-400e-4e55-97b3-94ac35fd32ee"),
+                            PermissionId = new Guid("238ec90a-8408-4fbe-a991-eb8f2eb4a28c")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("a6f25e26-400e-4e55-97b3-94ac35fd32ee"),
+                            PermissionId = new Guid("b248903f-6891-4ebb-8b33-55a3dfa879df")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("fcd2fb03-484d-4c67-9940-bf4668619e9d"),
+                            PermissionId = new Guid("22a895e7-40ac-4168-bc64-def6c6e945a6")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("fcd2fb03-484d-4c67-9940-bf4668619e9d"),
+                            PermissionId = new Guid("02cd1655-929b-437b-98e5-8a6551eae34d")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("fcd2fb03-484d-4c67-9940-bf4668619e9d"),
+                            PermissionId = new Guid("b84f9ad1-b64f-40b7-8fb2-f71c44ef0106")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("fcd2fb03-484d-4c67-9940-bf4668619e9d"),
+                            PermissionId = new Guid("e95657da-49a6-49fc-8d6f-384a2dc45cce")
+                        });
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.User", b =>
@@ -449,6 +789,15 @@ namespace ECommerce.Infrastructure.Migrations
                             Name = "Thanh",
                             Password = "$2a$11$0/CP8hh.odVCJCJi0d261ObBVpXQ06FuX53Aiq6Fn.0pKKdcdnMz2",
                             Phone = "0985632147"
+                        },
+                        new
+                        {
+                            Id = new Guid("35e3a23d-4ac9-4282-89e9-5ea690da8458"),
+                            CreatedAt = new DateTime(2024, 3, 22, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "minhquang85213@gmail.com",
+                            Name = "Quang",
+                            Password = "$2a$11$FkdaLqGjhB0K5sPGuD71NOa0ggTcYkn/R.b8UWBKbHyxRSBruexR.",
+                            Phone = "0789653241"
                         });
                 });
 
@@ -471,6 +820,11 @@ namespace ECommerce.Infrastructure.Migrations
                         {
                             UserId = new Guid("d1407a13-ad60-48ad-8346-8fba9cbb4f41"),
                             RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf")
+                        },
+                        new
+                        {
+                            UserId = new Guid("35e3a23d-4ac9-4282-89e9-5ea690da8458"),
+                            RoleId = new Guid("fcd2fb03-484d-4c67-9940-bf4668619e9d")
                         });
                 });
 
@@ -556,6 +910,25 @@ namespace ECommerce.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("ECommerce.Domain.Entities.Product_Coupons", b =>
+                {
+                    b.HasOne("ECommerce.Domain.Entities.Coupon", "Coupon")
+                        .WithMany("Product_Coupons")
+                        .HasForeignKey("CouponId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerce.Domain.Entities.Product", "Product")
+                        .WithMany("Product_Coupons")
+                        .HasForeignKey("CouponId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Coupon");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("ECommerce.Domain.Entities.RefreshToken", b =>
                 {
                     b.HasOne("ECommerce.Domain.Entities.User", "User")
@@ -615,6 +988,11 @@ namespace ECommerce.Infrastructure.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("ECommerce.Domain.Entities.Coupon", b =>
+                {
+                    b.Navigation("Product_Coupons");
+                });
+
             modelBuilder.Entity("ECommerce.Domain.Entities.Order", b =>
                 {
                     b.Navigation("OrderItems");
@@ -633,6 +1011,8 @@ namespace ECommerce.Infrastructure.Migrations
                     b.Navigation("CartItems");
 
                     b.Navigation("OrderItems");
+
+                    b.Navigation("Product_Coupons");
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.Role", b =>

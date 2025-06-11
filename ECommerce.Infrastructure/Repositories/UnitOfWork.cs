@@ -1,13 +1,17 @@
 ﻿using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Repositories.CartRepository;
+using ECommerce.Application.Interfaces.Repositories.CouponRepository;
 using ECommerce.Application.Interfaces.Repositories.OrderRepository;
 using ECommerce.Application.Interfaces.Repositories.PermissionRepository;
+using ECommerce.Application.Interfaces.Repositories.ProductRepository;
 using ECommerce.Application.Interfaces.Repositories.RoleRepository;
 using ECommerce.Domain.Entities;
 using ECommerce.Infrastructure.Data;
 using ECommerce.Infrastructure.Repositories.CartRepo;
+using ECommerce.Infrastructure.Repositories.CouponRepo;
 using ECommerce.Infrastructure.Repositories.OrderRepo;
 using ECommerce.Infrastructure.Repositories.PermissionRepo;
+using ECommerce.Infrastructure.Repositories.ProductRepo;
 using ECommerce.Infrastructure.Repositories.RoleRepo;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -26,7 +30,7 @@ namespace ECommerce.Infrastructure.Repositories
         public IGenericRepository<Category> Category { get; private set; }
         public ICartRepository Carts { get; private set; }
 
-        public IGenericRepository<Product> Product { get; private set; }
+        public IProductRepository Product { get; private set; }
 
         public IGenericRepository<CartItem> CartItem { get; private set; }
 
@@ -39,6 +43,8 @@ namespace ECommerce.Infrastructure.Repositories
         public IPermissionRepository Permissions { get; private set; }
         public IGenericRepository<UserRole> UserRole { get; private set; }
         public IGenericRepository<RolePermission> RolePermission { get; private set; }
+        public ICouponRepository Coupons { get; private set; }
+        public IGenericRepository<Product_Coupons> Product_Coupon { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -48,7 +54,7 @@ namespace ECommerce.Infrastructure.Repositories
             RefreshToken = new GenericRepository<RefreshToken>(_db);
             Category = new GenericRepository<Category>(_db);
             Carts = new CartRepository(_db);
-            Product = new GenericRepository<Product>(_db);
+            Product = new ProductRepository(_db);
             CartItem = new GenericRepository<CartItem>(_db);
             Orders = new OrderRepository(_db);
             OrderItem = new GenericRepository<OrderItem>(_db);
@@ -57,6 +63,8 @@ namespace ECommerce.Infrastructure.Repositories
             Permissions = new PermissionRepository(_db);
             UserRole = new GenericRepository<UserRole>(_db);
             RolePermission = new GenericRepository<RolePermission>(_db);
+            Coupons = new CouponRepository(_db);
+            Product_Coupon = new GenericRepository<Product_Coupons>(_db);
         }
 
 

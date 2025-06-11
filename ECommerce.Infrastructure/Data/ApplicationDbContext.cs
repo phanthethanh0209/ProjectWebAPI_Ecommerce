@@ -20,6 +20,8 @@ namespace ECommerce.Infrastructure.Data
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
+        public DbSet<Product_Coupons> Product_Coupons { get; set; }
 
         #endregion
 
@@ -33,9 +35,27 @@ namespace ECommerce.Infrastructure.Data
                 e.HasKey(pk => pk.Id);
                 e.HasIndex(u => u.Email).IsUnique();
 
-                // password = Thanh123@
                 e.HasData(
-                    new User { Id = Guid.Parse("d1407a13-ad60-48ad-8346-8fba9cbb4f41"), Email = "Thanh123@gmail.com", Name = "Thanh", Phone = "0985632147", Password = "$2a$11$0/CP8hh.odVCJCJi0d261ObBVpXQ06FuX53Aiq6Fn.0pKKdcdnMz2", CreatedAt = new DateTime(2024, 03, 22, 12, 0, 0) });
+
+                    new User
+                    {
+                        Id = Guid.Parse("d1407a13-ad60-48ad-8346-8fba9cbb4f41"),
+                        Email = "Thanh123@gmail.com",
+                        Name = "Thanh",
+                        Phone = "0985632147",
+                        Password = "$2a$11$0/CP8hh.odVCJCJi0d261ObBVpXQ06FuX53Aiq6Fn.0pKKdcdnMz2",// password = Thanh123@
+                        CreatedAt = new DateTime(2024, 03, 22, 12, 0, 0)
+                    },
+
+                    new User
+                    {
+                        Id = Guid.Parse("35e3a23d-4ac9-4282-89e9-5ea690da8458"),
+                        Email = "minhquang85213@gmail.com",
+                        Name = "Quang",
+                        Phone = "0789653241",
+                        Password = "$2a$11$FkdaLqGjhB0K5sPGuD71NOa0ggTcYkn/R.b8UWBKbHyxRSBruexR.",// password = Quang456@
+                        CreatedAt = new DateTime(2024, 03, 22, 12, 0, 0)
+                    });
             });
 
             modelBuilder.Entity<Role>(e =>
@@ -62,7 +82,8 @@ namespace ECommerce.Infrastructure.Data
                     .HasForeignKey(r => r.UserId);
 
                 e.HasData(
-                    new UserRole { UserId = Guid.Parse("d1407a13-ad60-48ad-8346-8fba9cbb4f41"), RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf") });
+                    new UserRole { UserId = Guid.Parse("d1407a13-ad60-48ad-8346-8fba9cbb4f41"), RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf") },
+                    new UserRole { UserId = Guid.Parse("35e3a23d-4ac9-4282-89e9-5ea690da8458"), RoleId = Guid.Parse("fcd2fb03-484d-4c67-9940-bf4668619e9d") });
             });
 
             modelBuilder.Entity<Permission>(e =>
@@ -298,6 +319,27 @@ namespace ECommerce.Infrastructure.Data
                 e.HasOne(e => e.Order)
                     .WithOne(e => e.Payment)
                     .HasForeignKey<Payment>(e => e.OrderId);
+            });
+
+            modelBuilder.Entity<Coupon>(e =>
+            {
+                e.ToTable("Coupon");
+                e.HasKey(pk => pk.Id);
+                //e.Property(x => x.CouponType).HasConversion<int>();
+            });
+
+            modelBuilder.Entity<Product_Coupons>(e =>
+            {
+                e.ToTable("Product_Coupons");
+                e.HasKey(pk => new { pk.CouponId, pk.ProductId });
+
+                e.HasOne(e => e.Coupon)
+                    .WithMany(e => e.Product_Coupons)
+                    .HasForeignKey(e => e.CouponId);
+
+                e.HasOne(e => e.Product)
+                    .WithMany(e => e.Product_Coupons)
+                    .HasForeignKey(e => e.ProductId);
             });
         }
     }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250521103134_dbupdateHasData")]
-    partial class dbupdateHasData
+    [Migration("20250611073005_EditFK_ProductCoupon")]
+    partial class EditFK_ProductCoupon
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace ECommerce.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("560a88f4-f3e5-40e6-8076-5cd6780dc14a"),
-                            CreatedAt = new DateTime(2025, 5, 21, 10, 31, 33, 340, DateTimeKind.Utc).AddTicks(9112),
+                            CreatedAt = new DateTime(2024, 3, 22, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             TotalAmount = 0m,
                             UserId = new Guid("d1407a13-ad60-48ad-8346-8fba9cbb4f41")
                         });
@@ -132,6 +132,42 @@ namespace ECommerce.Infrastructure.Migrations
                             Description = "Các loại tivi, màn hình",
                             Name = "TV & Màn hình"
                         });
+                });
+
+            modelBuilder.Entity("ECommerce.Domain.Entities.Coupon", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CouponType")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("CouponValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Coupon", (string)null);
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.Order", b =>
@@ -458,6 +494,21 @@ namespace ECommerce.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ECommerce.Domain.Entities.Product_Coupons", b =>
+                {
+                    b.Property<Guid>("CouponId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CouponId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Product_Coupons", (string)null);
+                });
+
             modelBuilder.Entity("ECommerce.Domain.Entities.RefreshToken", b =>
                 {
                     b.Property<Guid>("Id")
@@ -740,6 +791,15 @@ namespace ECommerce.Infrastructure.Migrations
                             Name = "Thanh",
                             Password = "$2a$11$0/CP8hh.odVCJCJi0d261ObBVpXQ06FuX53Aiq6Fn.0pKKdcdnMz2",
                             Phone = "0985632147"
+                        },
+                        new
+                        {
+                            Id = new Guid("35e3a23d-4ac9-4282-89e9-5ea690da8458"),
+                            CreatedAt = new DateTime(2024, 3, 22, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "minhquang85213@gmail.com",
+                            Name = "Quang",
+                            Password = "$2a$11$FkdaLqGjhB0K5sPGuD71NOa0ggTcYkn/R.b8UWBKbHyxRSBruexR.",
+                            Phone = "0789653241"
                         });
                 });
 
@@ -762,6 +822,11 @@ namespace ECommerce.Infrastructure.Migrations
                         {
                             UserId = new Guid("d1407a13-ad60-48ad-8346-8fba9cbb4f41"),
                             RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf")
+                        },
+                        new
+                        {
+                            UserId = new Guid("35e3a23d-4ac9-4282-89e9-5ea690da8458"),
+                            RoleId = new Guid("fcd2fb03-484d-4c67-9940-bf4668619e9d")
                         });
                 });
 
@@ -847,6 +912,25 @@ namespace ECommerce.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("ECommerce.Domain.Entities.Product_Coupons", b =>
+                {
+                    b.HasOne("ECommerce.Domain.Entities.Coupon", "Coupon")
+                        .WithMany("Product_Coupons")
+                        .HasForeignKey("CouponId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerce.Domain.Entities.Product", "Product")
+                        .WithMany("Product_Coupons")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Coupon");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("ECommerce.Domain.Entities.RefreshToken", b =>
                 {
                     b.HasOne("ECommerce.Domain.Entities.User", "User")
@@ -906,6 +990,11 @@ namespace ECommerce.Infrastructure.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("ECommerce.Domain.Entities.Coupon", b =>
+                {
+                    b.Navigation("Product_Coupons");
+                });
+
             modelBuilder.Entity("ECommerce.Domain.Entities.Order", b =>
                 {
                     b.Navigation("OrderItems");
@@ -924,6 +1013,8 @@ namespace ECommerce.Infrastructure.Migrations
                     b.Navigation("CartItems");
 
                     b.Navigation("OrderItems");
+
+                    b.Navigation("Product_Coupons");
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.Role", b =>

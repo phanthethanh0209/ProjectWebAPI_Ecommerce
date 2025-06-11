@@ -15,7 +15,7 @@
 - Swagger UI (Tài liệu API)
 - Repository Pattern (Quản lý dữ liệu)
 - Validation (Kiểm tra dữ liệu đầu vào sử dụng Fluent Validation)
-- Hangfire cho tác vụ nền
+- Hangfire & MailKit: Gửi email xác nhận đơn hàng sau khi thanh toán thành công
 - Stripe API cho thanh toán
 
 ## 📂 Cấu trúc dự án
@@ -24,7 +24,7 @@ Dự án được tổ chức theo nguyên tắc Clean Architecture:
 - **ECommerce.API**: Chứa các controller API, middleware, template email và cấu hình
 - **ECommerce.Application**: Chứa logic nghiệp vụ, handler CQRS, DTO và service
 - **ECommerce.Domain**: Định nghĩa các entity, enum
-- **ECommerce.Infrastructure**: Triển khai repository, DbContext, JWT và tích hợp dịch vụ bên ngoài như Hangfire, Stripe
+- **ECommerce.Infrastructure**: Triển khai repository, DbContext, JWT và tích hợp dịch vụ bên ngoài như Hangfire, Stripe, MailKit
 
 ```
 ECommerce/
@@ -58,7 +58,7 @@ ECommerce/
 - Xác thực: JWT Authentication (JSON Web Tokens), Refresh Token
 - Phân quyền theo Role & Permission (Admin, Customer, Manager) với Custom Authorization
 - Xử lý thanh toán qua Stripe (sử dụng Stripe Webhook để cập nhật trạng thái đơn hàng)
-- Gửi email xác nhận đơn hàng và cập nhật trạng thái đơn hàng (sử dụng BackgroundJob Hangfire)
+- Gửi email xác nhận đơn hàng và cập nhật trạng thái đơn hàng (sử dụng BackgroundJob Hangfire + MailKit)
 
 ## 🛠️ Phân quyền
 
@@ -70,7 +70,7 @@ Tất cả được ánh xạ tự động và kiểm tra bằng Attribute `HasP
 
 Dự án sử dụng Hangfire để xử lý các tác vụ nền, bao gồm:
 - Gửi email xác nhận đơn hàng sau khi thanh toán thành công
-- Hủy đơn hàng nếu chưa thanh toán sau 15 phút  
+- Hủy đơn hàng nếu chưa thanh toán sau 15 phút với MailKit  
 Có thể truy cập dashboard tại `/hangfire` để theo dõi job
 
 ## 🔄 Cổng thanh toán Stripe

@@ -52,13 +52,15 @@ ECommerce/
 
 - Đăng ký và đăng nhập người dùng với xác thực JWT (JSON Web Tokens)
 - Quản lý người dùng: Xác thực, phân quyền và quản lý thông tin người dùng
-- Quản lý danh mục 
+- Quản lý danh mục
 - Quản lý sản phẩm (API công khai để lấy danh sách sản phẩm hoặc sản phẩm theo ID)
 - Tạo và quản lý đơn hàng (Phân trang, lọc, tìm kiếm đơn hàng theo trạng thái, theo thời gian)
 - Xác thực: JWT Authentication (JSON Web Tokens), Refresh Token
 - Phân quyền theo Role & Permission (Admin, Customer, Manager) với Custom Authorization
 - Xử lý thanh toán qua Stripe (sử dụng Stripe Webhook để cập nhật trạng thái đơn hàng)
-- Gửi email xác nhận đơn hàng và cập nhật trạng thái đơn hàng (sử dụng BackgroundJob Hangfire + MailKit)
+- Quản lý khuyến mãi (Tạo, thêm, xóa sản phẩm trong khuyến mãi) 
+- Đặt lịch gửi email thông báo khuyến mãi cho tất cả user và cập nhật trạng thái khi khuyến mãi hết hạn (BackgroundJob Hangfire + MailKit)
+- Gửi email xác nhận đơn hàng và cập nhật trạng thái đơn hàng (Hangfire + MailKit)
 
 ## 🛠️ Phân quyền
 
@@ -70,7 +72,9 @@ Tất cả được ánh xạ tự động và kiểm tra bằng Attribute `HasP
 
 Dự án sử dụng Hangfire để xử lý các tác vụ nền, bao gồm:
 - Gửi email xác nhận đơn hàng sau khi thanh toán thành công
-- Hủy đơn hàng nếu chưa thanh toán sau 15 phút với MailKit  
+- Hủy đơn hàng nếu chưa thanh toán sau 15 phút với MailKit
+- Gửi email thông báo khuyến mãi cho tất cả user theo thời gian bắt đầu    
+- Cập nhật trạng thái khi khuyến mãi hết hạn  
 Có thể truy cập dashboard tại `/hangfire` để theo dõi job
 
 ## 🔄 Cổng thanh toán Stripe

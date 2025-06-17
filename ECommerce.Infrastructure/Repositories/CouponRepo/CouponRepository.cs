@@ -23,5 +23,13 @@ namespace ECommerce.Infrastructure.Repositories.CouponRepo
                     && productIds.Contains(t.ProductId))
                 .Select(cp => cp.ProductId).ToListAsync();
         }
+
+        public async Task<Coupon?> GetValidCouponForProductAsync(Guid productId)
+        {
+            return await _db.Product_Coupons.Where(t => t.ProductId == productId)
+                 .Where(c => c.Coupon.StartDate <= DateTime.UtcNow && DateTime.UtcNow <= c.Coupon.EndDate)
+                 .Select(t => t.Coupon)
+                 .FirstOrDefaultAsync();
+        }
     }
 }

@@ -4,6 +4,7 @@ using ECommerce.Application.Features.Coupons.Commands.CreateCoupon;
 using ECommerce.Application.Features.Coupons.Commands.RemoveProductToCoupon;
 using ECommerce.Application.Features.Coupons.DTOs;
 using ECommerce.Application.Features.Coupons.Queries.GetCouponById;
+using ECommerce.Infrastructure.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +21,7 @@ namespace ECommerce.API.Controllers
             _mediator = mediator;
         }
 
-        //[HasPermission(new[] { "Create.Coupon" })]
+        [HasPermission(new[] { "Create.Coupon" })]
         [HttpPost]
         public async Task<IActionResult> CreateCoupon([FromBody] CreateCouponCommand command)
         {
@@ -28,6 +29,7 @@ namespace ECommerce.API.Controllers
             return result.IsSuccess ? Ok(result.Data) : BadRequest(result.ErrorMessage);
         }
 
+        [HasPermission(new[] { "Create.Coupon" })]
         [HttpPost("AddProduct")]
         public async Task<IActionResult> AddProductToCoupon([FromBody] AddProductToCouponCommand command)
         {
@@ -51,6 +53,7 @@ namespace ECommerce.API.Controllers
             return result.IsSuccess ? Ok(result.Data) : BadRequest(result.ErrorMessage);
         }
 
+        [HasPermission(new[] { "Delete.ProductCoupon" })]
         [HttpDelete("{couponId}/products/{productId}")]
         public async Task<IActionResult> RemoveProductToCoupon([FromRoute] Guid couponId, [FromRoute] Guid productId)
         {

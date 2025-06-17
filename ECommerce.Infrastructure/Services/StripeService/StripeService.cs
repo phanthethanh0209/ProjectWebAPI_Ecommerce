@@ -84,7 +84,7 @@ namespace ECommerce.Infrastructure.Services.StripeService
                     // remove item in cart and update total cart
                     Cart cart = await _unitOfWork.Carts.GetFirstOrDefaultAsync(t => t.UserId == order.UserId);
                     await _unitOfWork.Carts.RemoveCartItemsAsync(cart.Id, order.OrderItems.Select(t => t.ProductId).ToList());
-                    cart.TotalAmount -= order.TotalAmount;
+                    //cart.TotalAmount -= order.TotalAmount;
                     await _unitOfWork.Carts.Update(cart);
 
                     // send email with mailkit use backgroundjob (fire and forget)

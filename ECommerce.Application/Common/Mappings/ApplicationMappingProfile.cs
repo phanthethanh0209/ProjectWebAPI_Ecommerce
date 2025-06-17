@@ -55,7 +55,9 @@ namespace ECommerce.Application.Common.Mappings
             // Mapping Cart
             CreateMap<AddToCartCommand, CartItem>().ReverseMap();
             CreateMap<Cart, CartDTO>();
-            CreateMap<CartItem, CartItemDTO>();
+            CreateMap<CartItem, CartItemDTO>()
+                .ForMember(t => t.OriginalPrice, opt => opt.MapFrom(src => src.Product.Price));
+
             CreateMap<UpdateCartCommand, CartItem>();
 
             // Mapping Coupon

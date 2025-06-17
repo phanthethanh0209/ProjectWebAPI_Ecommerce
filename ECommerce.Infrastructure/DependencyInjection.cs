@@ -1,5 +1,6 @@
 ﻿using ECommerce.Application.Interfaces.Authentication;
 using ECommerce.Application.Interfaces.BackgroundJobs;
+using ECommerce.Application.Interfaces.Pricing;
 using ECommerce.Application.Interfaces.QueryFilters;
 using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Services;
@@ -7,6 +8,7 @@ using ECommerce.Infrastructure.Authentication;
 using ECommerce.Infrastructure.BackgroundJobs.CouponBackgroundService;
 using ECommerce.Infrastructure.BackgroundJobs.OrderBackgroundService;
 using ECommerce.Infrastructure.Data;
+using ECommerce.Infrastructure.Pricing;
 using ECommerce.Infrastructure.QueryFilters;
 using ECommerce.Infrastructure.Repositories;
 using ECommerce.Infrastructure.Services.EmailService;
@@ -70,6 +72,8 @@ namespace ECommerce.Infrastructure
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IDateFilterService, DateFilterServices>();
+            services.AddScoped<ICouponCalculator, CouponCalculator>();
+
             services.AddScoped<IBackgroundService, HangfireBackgroundJobService>();
             services.AddScoped<IOrderBackgroundService, OrderBackgroundService>();
             services.AddScoped<ICouponBackgroundService, CouponBackgroundService>();

@@ -35,15 +35,6 @@ namespace ECommerce.Application.Features.Carts.Commands.AddToCart
                 if (cart == null)
                 {
                     throw new Exception("Cart not found");
-
-                    // new cart
-                    //cart = new()
-                    //{
-                    //    UserId = userId,
-                    //    TotalAmount = 0,
-                    //    CartItems = new List<CartItem>()
-                    //};
-                    //await _unitOfWork.Carts.AddAsync(cart);
                 }
 
                 // check exist product, -> increase quantity
@@ -72,7 +63,7 @@ namespace ECommerce.Application.Features.Carts.Commands.AddToCart
                 }
 
                 // update total cart
-                cart.TotalAmount = cart.CartItems.Sum(p => p.Quantity * p.Product.Price);
+                //cart.TotalAmount = cart.CartItems.Sum(p => p.Quantity * p.Product.Price);
                 await _unitOfWork.Carts.Update(cart);
 
                 await _unitOfWork.CommitTransactionAsync();

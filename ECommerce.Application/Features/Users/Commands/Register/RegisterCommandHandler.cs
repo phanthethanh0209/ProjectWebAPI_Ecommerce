@@ -30,7 +30,7 @@ namespace ECommerce.Application.Features.Users.Commands.Register
                 Cart cart = new()
                 {
                     UserId = user.Id,
-                    TotalAmount = 0
+                    //TotalAmount = 0
                 };
                 await _unitOfWork.Carts.AddAsync(cart);
 

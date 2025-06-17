@@ -3,6 +3,7 @@ using ECommerce.Application.Common.Responses;
 using ECommerce.Application.Features.Orders.DTOs;
 using ECommerce.Application.Interfaces.Authentication;
 using ECommerce.Application.Interfaces.BackgroundJobs;
+using ECommerce.Application.Interfaces.Pricing;
 using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Application.Interfaces.Services;
 using ECommerce.Domain.Entities;
@@ -18,14 +19,18 @@ namespace ECommerce.Application.Features.Orders.Commands.CreateOrder
         private readonly IStripeService _stripeService;
         private readonly IBackgroundService _backgroundService;
         private readonly ICurrentUserService _currentUserService;
+        private readonly ICouponCalculator _couponCalculator;
 
-        public CreateOrderCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IStripeService stripeService, IBackgroundService backgroundService, ICurrentUserService currentUserService)
+        public CreateOrderCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IStripeService stripeService,
+            IBackgroundService backgroundService, ICurrentUserService currentUserService,
+            ICouponCalculator couponCalculator)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _stripeService = stripeService;
             _backgroundService = backgroundService;
             _currentUserService = currentUserService;
+            _couponCalculator = couponCalculator;
         }
 
         public async Task<ResultResponse<Guid>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -72,13 +77,14 @@ namespace ECommerce.Application.Features.Orders.Commands.CreateOrder
                         throw new Exception($"Not enough stock for product {product.Id}");
 
                     // add order item
+                    var discountAmount = await _couponCalculator.CalculateDiscountAmount(product);
                     OrderItem orderItem = _mapper.Map<OrderItem>(item);
-                    orderItem.Price = product.Price;
+                    orderItem.Price = product.Price - discountAmount;
                     orderItem.OrderId = order.Id;
                     await _unitOfWork.OrderItem.AddAsync(orderItem);
 
                     // set total amount for order
-                    total += product.Price * item.Quantity;
+                    total += orderItem.Price * item.Quantity;
                 }
 
                 order.TotalAmount = total;

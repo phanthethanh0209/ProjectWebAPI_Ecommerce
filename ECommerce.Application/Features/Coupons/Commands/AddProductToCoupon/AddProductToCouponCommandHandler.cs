@@ -19,8 +19,13 @@ namespace ECommerce.Application.Features.Coupons.Commands.AddProductToCoupon
 
         public async Task<ResultResponse<Guid>> Handle(AddProductToCouponCommand request, CancellationToken cancellationToken)
         {
-            Coupon coupon = await _unitOfWork.Coupons.GetFirstOrDefaultAsync(t => t.Id == request.CouponId && t.IsActive);
+            Coupon coupon = await _unitOfWork.Coupons.GetFirstOrDefaultAsync(t => t.Id == request.CouponId);
             if (coupon == null)
+            {
+                throw new Exception("The coupon not found");
+            }
+
+            if (DateTime.UtcNow > coupon.EndDate)
             {
                 throw new Exception("The coupon has expired and cannot be used");
             }
@@ -34,12 +39,19 @@ namespace ECommerce.Application.Features.Coupons.Commands.AddProductToCoupon
                 if (notFoundIds.Any())
                     throw new Exception($"Some product not found: {string.Join(", ", notFoundIds)}");
 
-                // check existing products in coupon
+                // check existing products in current coupon --> ignore
                 List<Guid> existingCouponProduct = await _unitOfWork.Coupons.GetExistingProductIdsAsync(coupon.Id, request.ProductIds.ToList());
                 IEnumerable<Guid> CouponProductNotExist = request.ProductIds.Except(existingCouponProduct);
 
                 foreach (Guid item in CouponProductNotExist)
                 {
+                    // check existing products in other coupon on startDate -> endDate
+                    Coupon? couponOtherActive = await _unitOfWork.Coupons.GetValidCouponForProductAsync(item);
+                    if (couponOtherActive != null)
+                    {
+                        throw new Exception($"Product {item} existing in other active coupon '{couponOtherActive.Id}'");
+                    }
+
                     await _unitOfWork.Product_Coupon.AddAsync(new Product_Coupons
                     {
                         CouponId = request.CouponId,

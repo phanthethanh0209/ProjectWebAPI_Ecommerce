@@ -6,6 +6,7 @@ namespace ECommerce.Application.Interfaces.Repositories.CouponRepository
     {
         Task<List<Guid>> GetExistingProductIdsAsync(Guid couponId, List<Guid> productIds);
         Task<Coupon?> GetCouponByIdWithItemsAsync(Guid couponId);
+        Task<Coupon?> GetValidCouponForProductAsync(Guid productId);
 
     }
 }

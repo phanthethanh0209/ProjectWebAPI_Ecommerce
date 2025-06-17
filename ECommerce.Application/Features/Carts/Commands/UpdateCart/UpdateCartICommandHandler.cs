@@ -50,7 +50,7 @@ namespace ECommerce.Application.Features.Carts.Commands.UpdateCart
 
                 _mapper.Map(request, cartItem);
                 // update total cart
-                cart.TotalAmount = cart.CartItems.Sum(p => p.Quantity * p.Product.Price);
+                //cart.TotalAmount = cart.CartItems.Sum(p => p.Quantity * p.Product.Price);
                 await _unitOfWork.Carts.Update(cart);
                 await _unitOfWork.CartItem.Update(cartItem);
 

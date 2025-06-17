@@ -39,8 +39,8 @@ namespace ECommerce.Infrastructure.Data
 
                     new User
                     {
-                        Id = Guid.Parse("d1407a13-ad60-48ad-8346-8fba9cbb4f41"),
-                        Email = "Thanh123@gmail.com",
+                        Id = Guid.Parse("3e8e1117-81b7-49aa-9961-d9bcc0a26266"),
+                        Email = "phanthethanh2003@gmail.com",
                         Name = "Thanh",
                         Phone = "0985632147",
                         Password = "$2a$11$0/CP8hh.odVCJCJi0d261ObBVpXQ06FuX53Aiq6Fn.0pKKdcdnMz2",// password = Thanh123@
@@ -82,7 +82,7 @@ namespace ECommerce.Infrastructure.Data
                     .HasForeignKey(r => r.UserId);
 
                 e.HasData(
-                    new UserRole { UserId = Guid.Parse("d1407a13-ad60-48ad-8346-8fba9cbb4f41"), RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf") },
+                    new UserRole { UserId = Guid.Parse("3e8e1117-81b7-49aa-9961-d9bcc0a26266"), RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf") },
                     new UserRole { UserId = Guid.Parse("35e3a23d-4ac9-4282-89e9-5ea690da8458"), RoleId = Guid.Parse("fcd2fb03-484d-4c67-9940-bf4668619e9d") });
             });
 
@@ -122,7 +122,11 @@ namespace ECommerce.Infrastructure.Data
                     // Payment Permissions
                     new Permission { Id = Guid.Parse("fa8fed50-24a7-4871-84d7-20b2376e8e27"), Name = "View.Payment", Description = "View payment" },
                     new Permission { Id = Guid.Parse("aeb40204-4004-4884-b510-e46742046698"), Name = "Create.Payment", Description = "Create payment" },
-                    new Permission { Id = Guid.Parse("fcadd358-388c-4d20-a5af-86a235cf4352"), Name = "Update.Payment", Description = "Update payment" }
+                    new Permission { Id = Guid.Parse("fcadd358-388c-4d20-a5af-86a235cf4352"), Name = "Update.Payment", Description = "Update payment" },
+                    // Coupon Permissions
+                    new Permission { Id = Guid.Parse("043fd65d-f301-4728-9a94-4dbe732d892c"), Name = "Delete.ProductCoupon", Description = "delete product coupon" },
+                    new Permission { Id = Guid.Parse("315148e0-1a47-41fb-8eeb-c4d5f4eba768"), Name = "Create.Coupon", Description = "Create coupon" },
+                    new Permission { Id = Guid.Parse("f10091a0-167a-4792-bcf6-385ab85c1c17"), Name = "Update.Payment", Description = "Update payment" }
                 );
             });
 
@@ -140,40 +144,43 @@ namespace ECommerce.Infrastructure.Data
 
                 e.HasData(
                     // Admin Permissions
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("d57fc2b6-0dc6-4a88-bbaf-bb876aa14310") }, // View.User
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("6610746a-389f-472e-b4eb-5eef6295b361") }, // Update.User
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("ccaaebbd-4740-4516-b860-f6440fd4c55f") }, // Delete.User
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("238ec90a-8408-4fbe-a991-eb8f2eb4a28c") }, // View.Cart
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("b248903f-6891-4ebb-8b33-55a3dfa879df") }, // Update.Cart
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("8c711aad-83b0-4e9e-af6d-b406ca1b150d") }, // Delete.Cart
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("22a895e7-40ac-4168-bc64-def6c6e945a6") }, // View.Order
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("b764954a-903a-4ec2-ac11-988e2f9f22ae") }, // Create.Order
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("02cd1655-929b-437b-98e5-8a6551eae34d") }, // Update.Order
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("c5c65040-fd76-440f-bec0-51f86f19e431") }, // Delete.Order
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("b84f9ad1-b64f-40b7-8fb2-f71c44ef0106") }, // Approve.Order
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("b898cc6c-762e-40d4-9a9c-0cd1a3eb7b8e") }, // View.OrderItem
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("b4c24c83-5628-4a9f-834b-10b07147481d") }, // Update.OrderItem
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("e95657da-49a6-49fc-8d6f-384a2dc45cce") }, // View.Product
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("7b61a427-65a7-459f-a0ed-41154bfaadf5") }, // Create.Product
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("a3ac9aaa-f16a-4100-b07b-e0d4897193db") }, // Update.Product
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("61d6359f-ce94-4d20-b2d7-66d03ff92891") }, // Delete.Product
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("86685765-75fd-4f6d-9f05-46c65ada32d8") }, // View.Category
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("e1532412-29c1-4e1c-afbf-0f5c5c4e41df") }, // Create.Category
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("00cff030-2921-4267-b802-86dc6d88174a") }, // Update.Category
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("3759092e-5e7b-4ca2-8c83-33104f549a0a") }, // Delete.Category
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("fa8fed50-24a7-4871-84d7-20b2376e8e27") }, // View.Payment
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("aeb40204-4004-4884-b510-e46742046698") }, // Create.Payment
-                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("fcadd358-388c-4d20-a5af-86a235cf4352") }, // Update.Payment
-                                                                                                                                                                           // Customer Permissions
-                    new RolePermission { RoleId = Guid.Parse("a6f25e26-400e-4e55-97b3-94ac35fd32ee"), PermissionId = Guid.Parse("22a895e7-40ac-4168-bc64-def6c6e945a6") }, // View.Order
-                    new RolePermission { RoleId = Guid.Parse("a6f25e26-400e-4e55-97b3-94ac35fd32ee"), PermissionId = Guid.Parse("b764954a-903a-4ec2-ac11-988e2f9f22ae") }, // Create.Order
-                    new RolePermission { RoleId = Guid.Parse("a6f25e26-400e-4e55-97b3-94ac35fd32ee"), PermissionId = Guid.Parse("238ec90a-8408-4fbe-a991-eb8f2eb4a28c") }, // View.Cart
-                    new RolePermission { RoleId = Guid.Parse("a6f25e26-400e-4e55-97b3-94ac35fd32ee"), PermissionId = Guid.Parse("b248903f-6891-4ebb-8b33-55a3dfa879df") }, // Update.Cart
-                                                                                                                                                                           // Manager Permissions
-                    new RolePermission { RoleId = Guid.Parse("fcd2fb03-484d-4c67-9940-bf4668619e9d"), PermissionId = Guid.Parse("22a895e7-40ac-4168-bc64-def6c6e945a6") }, // View.Order
-                    new RolePermission { RoleId = Guid.Parse("fcd2fb03-484d-4c67-9940-bf4668619e9d"), PermissionId = Guid.Parse("02cd1655-929b-437b-98e5-8a6551eae34d") }, // Update.Order
-                    new RolePermission { RoleId = Guid.Parse("fcd2fb03-484d-4c67-9940-bf4668619e9d"), PermissionId = Guid.Parse("b84f9ad1-b64f-40b7-8fb2-f71c44ef0106") }, // Approve.Order
-                    new RolePermission { RoleId = Guid.Parse("fcd2fb03-484d-4c67-9940-bf4668619e9d"), PermissionId = Guid.Parse("e95657da-49a6-49fc-8d6f-384a2dc45cce") } // View.Product
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("d57fc2b6-0dc6-4a88-bbaf-bb876aa14310") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("6610746a-389f-472e-b4eb-5eef6295b361") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("ccaaebbd-4740-4516-b860-f6440fd4c55f") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("238ec90a-8408-4fbe-a991-eb8f2eb4a28c") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("b248903f-6891-4ebb-8b33-55a3dfa879df") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("8c711aad-83b0-4e9e-af6d-b406ca1b150d") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("22a895e7-40ac-4168-bc64-def6c6e945a6") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("b764954a-903a-4ec2-ac11-988e2f9f22ae") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("02cd1655-929b-437b-98e5-8a6551eae34d") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("c5c65040-fd76-440f-bec0-51f86f19e431") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("b84f9ad1-b64f-40b7-8fb2-f71c44ef0106") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("b898cc6c-762e-40d4-9a9c-0cd1a3eb7b8e") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("b4c24c83-5628-4a9f-834b-10b07147481d") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("e95657da-49a6-49fc-8d6f-384a2dc45cce") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("7b61a427-65a7-459f-a0ed-41154bfaadf5") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("a3ac9aaa-f16a-4100-b07b-e0d4897193db") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("61d6359f-ce94-4d20-b2d7-66d03ff92891") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("86685765-75fd-4f6d-9f05-46c65ada32d8") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("e1532412-29c1-4e1c-afbf-0f5c5c4e41df") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("00cff030-2921-4267-b802-86dc6d88174a") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("3759092e-5e7b-4ca2-8c83-33104f549a0a") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("fa8fed50-24a7-4871-84d7-20b2376e8e27") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("aeb40204-4004-4884-b510-e46742046698") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("fcadd358-388c-4d20-a5af-86a235cf4352") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("043fd65d-f301-4728-9a94-4dbe732d892c") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("315148e0-1a47-41fb-8eeb-c4d5f4eba768") },
+                    new RolePermission { RoleId = Guid.Parse("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"), PermissionId = Guid.Parse("f10091a0-167a-4792-bcf6-385ab85c1c17") },
+
+                    new RolePermission { RoleId = Guid.Parse("a6f25e26-400e-4e55-97b3-94ac35fd32ee"), PermissionId = Guid.Parse("22a895e7-40ac-4168-bc64-def6c6e945a6") },
+                    new RolePermission { RoleId = Guid.Parse("a6f25e26-400e-4e55-97b3-94ac35fd32ee"), PermissionId = Guid.Parse("b764954a-903a-4ec2-ac11-988e2f9f22ae") },
+                    new RolePermission { RoleId = Guid.Parse("a6f25e26-400e-4e55-97b3-94ac35fd32ee"), PermissionId = Guid.Parse("238ec90a-8408-4fbe-a991-eb8f2eb4a28c") },
+                    new RolePermission { RoleId = Guid.Parse("a6f25e26-400e-4e55-97b3-94ac35fd32ee"), PermissionId = Guid.Parse("b248903f-6891-4ebb-8b33-55a3dfa879df") },
+
+                    new RolePermission { RoleId = Guid.Parse("fcd2fb03-484d-4c67-9940-bf4668619e9d"), PermissionId = Guid.Parse("22a895e7-40ac-4168-bc64-def6c6e945a6") },
+                    new RolePermission { RoleId = Guid.Parse("fcd2fb03-484d-4c67-9940-bf4668619e9d"), PermissionId = Guid.Parse("02cd1655-929b-437b-98e5-8a6551eae34d") },
+                    new RolePermission { RoleId = Guid.Parse("fcd2fb03-484d-4c67-9940-bf4668619e9d"), PermissionId = Guid.Parse("b84f9ad1-b64f-40b7-8fb2-f71c44ef0106") },
+                    new RolePermission { RoleId = Guid.Parse("fcd2fb03-484d-4c67-9940-bf4668619e9d"), PermissionId = Guid.Parse("e95657da-49a6-49fc-8d6f-384a2dc45cce") }
                 );
             });
 
@@ -186,7 +193,7 @@ namespace ECommerce.Infrastructure.Data
                     .HasForeignKey<Cart>(fk => fk.UserId); // Cart dùng UserId làm FK
 
                 e.HasData(
-                    new Cart { Id = Guid.Parse("560a88f4-f3e5-40e6-8076-5cd6780dc14a"), TotalAmount = 0, UserId = Guid.Parse("d1407a13-ad60-48ad-8346-8fba9cbb4f41"), CreatedAt = new DateTime(2024, 03, 22, 12, 0, 0) });
+                    new Cart { Id = Guid.Parse("560a88f4-f3e5-40e6-8076-5cd6780dc14a"), UserId = Guid.Parse("3e8e1117-81b7-49aa-9961-d9bcc0a26266"), CreatedAt = new DateTime(2024, 03, 22, 12, 0, 0) });
             });
 
             modelBuilder.Entity<Category>(e =>

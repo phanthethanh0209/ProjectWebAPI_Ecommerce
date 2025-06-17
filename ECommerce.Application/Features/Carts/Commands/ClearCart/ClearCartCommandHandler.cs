@@ -32,7 +32,7 @@ namespace ECommerce.Application.Features.Carts.Commands.ClearCart
 
                 await _unitOfWork.Carts.ClearCartAsync(cart.Id);
                 // update total cart
-                cart.TotalAmount = 0;
+                //cart.TotalAmount = 0;
                 await _unitOfWork.Carts.Update(cart);
                 await _unitOfWork.CommitTransactionAsync();
 

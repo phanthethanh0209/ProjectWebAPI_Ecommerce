@@ -31,9 +31,6 @@ namespace ECommerce.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -49,8 +46,7 @@ namespace ECommerce.Infrastructure.Migrations
                         {
                             Id = new Guid("560a88f4-f3e5-40e6-8076-5cd6780dc14a"),
                             CreatedAt = new DateTime(2024, 3, 22, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalAmount = 0m,
-                            UserId = new Guid("d1407a13-ad60-48ad-8346-8fba9cbb4f41")
+                            UserId = new Guid("3e8e1117-81b7-49aa-9961-d9bcc0a26266")
                         });
                 });
 
@@ -413,6 +409,24 @@ namespace ECommerce.Infrastructure.Migrations
                             Id = new Guid("fcadd358-388c-4d20-a5af-86a235cf4352"),
                             Description = "Update payment",
                             Name = "Update.Payment"
+                        },
+                        new
+                        {
+                            Id = new Guid("043fd65d-f301-4728-9a94-4dbe732d892c"),
+                            Description = "delete product coupon",
+                            Name = "Delete.ProductCoupon"
+                        },
+                        new
+                        {
+                            Id = new Guid("315148e0-1a47-41fb-8eeb-c4d5f4eba768"),
+                            Description = "Create coupon",
+                            Name = "Create.Coupon"
+                        },
+                        new
+                        {
+                            Id = new Guid("f10091a0-167a-4792-bcf6-385ab85c1c17"),
+                            Description = "Update payment",
+                            Name = "Update.Payment"
                         });
                 });
 
@@ -707,6 +721,21 @@ namespace ECommerce.Infrastructure.Migrations
                         },
                         new
                         {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("043fd65d-f301-4728-9a94-4dbe732d892c")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("315148e0-1a47-41fb-8eeb-c4d5f4eba768")
+                        },
+                        new
+                        {
+                            RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf"),
+                            PermissionId = new Guid("f10091a0-167a-4792-bcf6-385ab85c1c17")
+                        },
+                        new
+                        {
                             RoleId = new Guid("a6f25e26-400e-4e55-97b3-94ac35fd32ee"),
                             PermissionId = new Guid("22a895e7-40ac-4168-bc64-def6c6e945a6")
                         },
@@ -782,9 +811,9 @@ namespace ECommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d1407a13-ad60-48ad-8346-8fba9cbb4f41"),
+                            Id = new Guid("3e8e1117-81b7-49aa-9961-d9bcc0a26266"),
                             CreatedAt = new DateTime(2024, 3, 22, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Thanh123@gmail.com",
+                            Email = "phanthethanh2003@gmail.com",
                             Name = "Thanh",
                             Password = "$2a$11$0/CP8hh.odVCJCJi0d261ObBVpXQ06FuX53Aiq6Fn.0pKKdcdnMz2",
                             Phone = "0985632147"
@@ -817,7 +846,7 @@ namespace ECommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("d1407a13-ad60-48ad-8346-8fba9cbb4f41"),
+                            UserId = new Guid("3e8e1117-81b7-49aa-9961-d9bcc0a26266"),
                             RoleId = new Guid("4ea25da4-9081-41f8-83ba-2ba6e047fcbf")
                         },
                         new

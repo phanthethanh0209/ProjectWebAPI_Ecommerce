@@ -85,7 +85,11 @@ Cách gọi và sử dụng thanh toán Stripe và webhook Stripe:
 - Gọi API tạo hóa đơn (api/Order/checkout)
 - Gọi API tạo thanh toán (api/Payment/create-payment-intent) sử dụng orderId vừa tạo
 - Dùng clientSecret paste vào code frontend (stripepayment.html) để test nhập trên giao diện
-- Chạy web và nhập thông tin card -> Submit
+- Chạy web và nhập thông tin card -> Submit  
+
+**Lưu ý:** Thanh toán Stripe test mode không nhận giá trị quá 8 chữ số (VND/USD)  
+- Với USD: 0.50 USD đến 999,999.99 USD  
+- Với VND: tối đa 99,999,999 VND.
 
 Các bước sử dụng Stripe CLI
 - Tải file stripe mới nhất từ link: https://github.com/stripe/stripe-cli/releases/tag/v1.26.1
